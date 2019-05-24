@@ -1,0 +1,9 @@
+/cmake-build-debug/
+/.idea/
+*.out*
+.DS_Store
+/temp/
+*.dSYM
+CMakeLists.txt
+*.a
+fractol
