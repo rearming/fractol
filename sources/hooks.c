@@ -1,46 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/13 11:19:47 by sleonard         ###   ########.fr       */
+/*   Created: 2019/05/24 17:10:27 by sleonard          #+#    #+#             */
+/*   Updated: 2019/05/24 17:15:27 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
+#include "fractol.h"
 
-typedef struct	s_image
+int 		cross_hook(void *param)
 {
-	void		*img;
-	char 		*data;
-	int 		bpp;
-	int 		line_size;
-	int 		endian;
-}				t_image;
+	(void)param;
+	exit(0);
+	return (0);
+}
 
-typedef struct 	s_point
+int 		key_hook(int key_code, void *param)
 {
-	int 		x;
-	int 		y;
-	int 		z;
-	int 		color;
-}				t_point;
+	t_mlx		*mlx;
 
-typedef struct	s_params
-{
+	mlx = (t_mlx*)param;
 
-}				t_params;
-
-typedef struct	s_mlx
-{
-	void		*mlx;
-	void		*win;
-	t_image		*img;
-	t_params	params;
-}				t_mlx;
-
-#endif
+	if (key_code == ESC)
+		exit(0);
+	return (0);
+}

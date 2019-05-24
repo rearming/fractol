@@ -20,7 +20,7 @@ set(Sources
         sources/image.c
         sources/init.c
         sources/mandelbrot.c
-        )
+        sources/hooks.c)
 
 set(mlx_includes
         /usr/local/include/)
