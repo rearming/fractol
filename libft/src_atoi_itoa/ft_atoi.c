@@ -50,11 +50,11 @@ int					ft_atoi(const char *str)
 	sign = get_sign(str, &pos);
 	while (ft_isdigit(str[pos]))
 	{
-		if (sign == 1 && (num > OVERFLOW ||
-			(num == OVERFLOW && str[pos] - '0' > 7)))
+		if (sign == 1 && (num > OVERFLOW_FT ||
+			(num == OVERFLOW_FT && str[pos] - '0' > 7)))
 			return (-1);
-		if (sign == -1 && (num > OVERFLOW ||
-			(num == OVERFLOW && str[pos] - '0' > 8)))
+		if (sign == -1 && (num > OVERFLOW_FT ||
+			(num == OVERFLOW_FT && str[pos] - '0' > 8)))
 			return (0);
 		num = num * 10 + str[pos] - '0';
 		pos++;

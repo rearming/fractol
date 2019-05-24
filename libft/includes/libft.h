@@ -24,7 +24,7 @@
 /*
 **	[Defines]
 */
-# define OVERFLOW 922337203685477580L
+# define OVERFLOW_FT 922337203685477580L
 
 /*
 **	[Types]

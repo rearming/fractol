@@ -2,8 +2,8 @@
 /.idea/
 *.out*
 .DS_Store
-/temp/
+temp
 *.dSYM
-CMakeLists.txt
 *.a
+*.o
 fractol

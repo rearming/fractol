@@ -19,6 +19,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+#include "libft.h"
 #include "structs.h"
 #include "colors.h"
 #include "key_codes.h"
