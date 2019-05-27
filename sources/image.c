@@ -27,6 +27,5 @@ void		image_put_pixel(t_image *img, t_point point, int color)
 		return ;
 	if (point.x < WIN_WIDTH && point.y < WIN_HEIGHT
 						&& point.y >= 0 && point.x >= 0)
-		*(int *)(img->data +
-				((point.x + point.y * WIN_WIDTH) * img->bpp)) = color;
+		img->data[((point.x + point.y * WIN_WIDTH) * img->bpp)] = color;
 }

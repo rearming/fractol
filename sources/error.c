@@ -19,13 +19,15 @@ void		raise_error(int code)
 	if (code == ERR_INV_FILE)
 		perror("Invalid file.\n");
 	if (code == ERR_INV_MAP)
-		write(1, "Valid map contains only numbers and whitespaces!\n", 62);
+		ft_printf("Valid map contains only numbers and whitespaces!\n");
 	if (code == ERR_MALLOC)
-		write(1, "Malloc failed.\n", 16);
+		ft_printf("Malloc failed.\n");
 	if (code == ERR_MLX_INIT)
-		write(1, "Mlx init failed.\n", 20);
+		ft_printf("Mlx init failed.\n");
 	if (code == ERR_USAGE)
 		show_usage();
+	if (code == ERR_OPENCL)
+		ft_printf("Open CL initialisation fails.\n");
 	exit(code);
 }
 

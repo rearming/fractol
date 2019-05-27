@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 14:48:09 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/27 16:57:26 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/27 20:11:23 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,6 @@ int 			get_color(int iters, t_mlx *mlx)
 	int green;
 	int blue;
 
-	red = RED;
-	green = GREEN;
-	blue = BLUE;
-
-	color = RED;
 	/*red = color >> 16 & 0xFF * (ft_abs(((long double)(iters - mlx->max_iters) / mlx->max_iters) * 255));
 	green = color >> 8 & 0xFF * (ft_abs(((long double)(iters - mlx->max_iters) / mlx->max_iters) * 255));
 	blue = color & 0xFF * (ft_abs(((long double)(iters - mlx->max_iters) / mlx->max_iters) * 255));*/
@@ -67,9 +62,6 @@ int 			get_color(int iters, t_mlx *mlx)
 	red = iters % mlx->rand[0] * 64;
 	green = iters % mlx->rand[1] * 32;
 	blue = iters % mlx->rand[2] * 16;
-	/*red = iters % 4 * 64;
-	green = iters % 8 * 32;
-	blue = iters % 16 * 16;*/
 
 	return (red << 16 | green << 8 | blue);
 }
@@ -114,11 +106,9 @@ void			mandelbrot(t_mlx *mlx)
 		curr.y = 0;
 		while (curr.y <= WIN_HEIGHT)
 		{
-
 			calc_mandelbrot(curr, mlx);
 			curr.y++;
 		}
 		curr.x++;
 	}
-	printf("call!\n");
 }

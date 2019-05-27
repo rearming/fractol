@@ -6,32 +6,19 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 17:56:11 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/27 14:38:24 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/27 21:07:17 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void		test_color(t_mlx *mlx, int color)
-{
-	for (int x = 0; x < WIN_WIDTH / 2; x++)
-	{
-		for (int y = 0; y < WIN_HEIGHT / 2; y++)
-		{
-			image_put_pixel(mlx->img, (t_point){x, y, 0}, color);
-		}
-	}
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
-}
-
-void		choose_fractal(t_mlx *mlx, char *name)
+void		render_fractal(t_mlx *mlx, char *name)
 {
 	if (ft_strstr(name, "mandelbrot"))
 	{
-		//open_cl_init();
-
 		set_def_mand_params(mlx);
-		mandelbrot(mlx);
+		render(mlx);
+		//mandelbrot(mlx);
 	}
 }
 
@@ -42,12 +29,10 @@ int 		main(int argc, char **argv)
 	mlx = ft_mlx_init();
 	if (argc != 2)
 		raise_error(ERR_USAGE);
-	choose_fractal(mlx, argv[1]);
-
-
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
+	mlx->cl = cl_init(mlx);
+	render_fractal(mlx, argv[1]);
 	mlx_hook(mlx->win, 2, 0, &key_hook, mlx);
 	mlx_hook(mlx->win, 17, 0, &cross_hook, mlx);
-	mlx_loop(mlx);
+	mlx_loop(mlx->mlx);
 	return (0);
 }

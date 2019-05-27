@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 17:56:23 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/27 17:05:52 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/27 20:30:19 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,27 @@
 */
 
 t_mlx		*ft_mlx_init(void);
+
+/*
+**	Open CL init
+*/
+
+t_cl		cl_init(t_mlx *mlx);
+char		*cl_gnl(int fd);
+
+
+/*
+**	Open CL utils
+*/
+
+void		cl_fill_buffer(t_mlx *mlx);
+void		cl_run_kernels(t_mlx *mlx);
+
+/*
+** Open CL render
+*/
+
+void		render(t_mlx *mlx);
 
 /*
 **	error
@@ -82,4 +103,5 @@ void		print_params(t_mlx *mlx);
 void		jump_to_left(t_mlx *mlx);
 void		jump_mandel(t_mlx *mlx);
 void		jump_star(t_mlx *mlx);
+
 #endif

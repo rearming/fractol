@@ -23,7 +23,11 @@ set(Sources
         sources/image.c
         sources/init.c
         sources/mandelbrot.c
-        sources/hooks.c debug/print_params.c sources/jumps.c)
+        sources/hooks.c
+        debug/print_params.c
+        sources/jumps.c
+        sources/opencl_utils.c
+        sources/cl_gnl.c)
 
 set(mlx_includes
         /usr/local/include/)
