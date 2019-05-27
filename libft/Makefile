@@ -71,8 +71,8 @@ MEMORY_OBJ = $(addprefix $(OBJ_DIR), $(MEMORY_FILES:.c=.o))
 # ============================================================================ #
 
 UTILS_FILES =			\
-	count_digits.c		\
-	count_digits_base.c	\
+	ft_count_digits.c		\
+	ft_count_digits_base.c	\
 	ft_isdigit.c		\
 	ft_isalpha.c		\
 	ft_isascii.c		\

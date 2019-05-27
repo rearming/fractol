@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 14:34:57 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/24 14:34:57 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/27 10:01:15 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,13 @@ void		raise_error(int code)
 		write(1, "Malloc failed.\n", 16);
 	if (code == ERR_MLX_INIT)
 		write(1, "Mlx init failed.\n", 20);
+	if (code == ERR_USAGE)
+		show_usage();
 	exit(code);
+}
+
+void		show_usage(void)
+{
+	ft_printf("Usage: ./fractol [fractal type]\n");
+	ft_printf("\tFor example: ./fractol mandelbrot");
 }

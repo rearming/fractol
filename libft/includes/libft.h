@@ -467,4 +467,9 @@ char				**clean_chr_mtrx(char **str);
 */
 size_t				ft_strlen_char(char *str, char breaker);
 
+/*
+**	Same usage as standard library printf.
+*/
+int			ft_printf(const char *format, ...);
+
 #endif

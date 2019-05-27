@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int		count_digits_base(char *str, int base)
+int		ft_count_digits_base(char *str, int base)
 {
 	int		i;
 	char	test;

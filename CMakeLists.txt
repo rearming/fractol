@@ -11,8 +11,11 @@ set(Includes
         includes/structs.h
         )
 
-set(Libft_includes
+set(libft_includes
         libft/includes)
+
+set(ft_printf_includes
+        libft/ft_printf/includes)
 
 set(Sources
         sources/error.c
@@ -20,7 +23,7 @@ set(Sources
         sources/image.c
         sources/init.c
         sources/mandelbrot.c
-        sources/hooks.c)
+        sources/hooks.c debug/print_params.c sources/jumps.c)
 
 set(mlx_includes
         /usr/local/include/)
@@ -28,12 +31,14 @@ set(mlx_includes
 include_directories(includes
 
         ${Includes}
-        ${Libft_includes}
+        ${libft_includes}
+        ${ft_printf_includes}
         ${mlx_includes}
         )
 
 link_directories(
         ./libft/
+        ./libft/ft_printf/
         /usr/local/lib/)
 
 add_executable(fractol
@@ -44,6 +49,7 @@ add_executable(fractol
 target_link_libraries(fractol
 
         "ft"
+        "ftprintf"
         "mlx"
         "-framework OpenGL"
         "-framework AppKit"

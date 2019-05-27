@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 17:56:23 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/24 18:28:06 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/27 11:37:55 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_mlx		*ft_mlx_init(void);
 */
 
 void		raise_error(int code);
+void		show_usage(void);
 
 /*
 **	hook
@@ -62,5 +63,22 @@ void		image_put_pixel(t_image *img, t_point point, int color);
 */
 
 void		mandelbrot(t_mlx *mlx);
+void		calc_mandelbrot(t_point curr, t_mlx *mlx);
+void		set_def_mand_params(t_mlx *mlx);
+void		set_mandel_params(t_mlx *mlx);
 
+/*
+**	debug
+*/
+
+void		print_mandel_params(t_mlx *mlx);
+void		print_params(t_mlx *mlx);
+
+/*
+**	jumps
+*/
+
+void		jump_to_left(t_mlx *mlx);
+void		jump_mandel(t_mlx *mlx);
+void		jump_star(t_mlx *mlx);
 #endif
