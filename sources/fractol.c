@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 17:56:11 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/27 11:32:23 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/27 14:38:24 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void		choose_fractal(t_mlx *mlx, char *name)
 {
 	if (ft_strstr(name, "mandelbrot"))
 	{
+		//open_cl_init();
+
 		set_def_mand_params(mlx);
 		mandelbrot(mlx);
 	}
@@ -38,10 +40,11 @@ int 		main(int argc, char **argv)
 	t_mlx		*mlx;
 
 	mlx = ft_mlx_init();
-
 	if (argc != 2)
 		raise_error(ERR_USAGE);
 	choose_fractal(mlx, argv[1]);
+
+
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
 	mlx_hook(mlx->win, 2, 0, &key_hook, mlx);
 	mlx_hook(mlx->win, 17, 0, &cross_hook, mlx);

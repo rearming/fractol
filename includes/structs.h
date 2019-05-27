@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/27 11:29:46 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/27 16:27:09 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ typedef struct 			s_point
 
 typedef struct			s_mp
 {
-	long double			left;
+	long double			xside;
+	long double			kostil;
 	long double			top;
-	long double 		xside;
-	long double 		yside;
-	long double 		xscale;
-	long double 		yscale;
-	int 				max_iters;
+	long double			yside;
+	long double			xscale;
+	long double			yscale;
+	long double			left;
 }						t_mp;
 
 typedef struct			s_mlx
@@ -48,6 +48,8 @@ typedef struct			s_mlx
 	t_image				*img;
 	int 				mode;
 	t_mp				mp;
+	int					max_iters;
+	int 				rand[3];
 }						t_mlx;
 
 #endif

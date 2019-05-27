@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 17:56:23 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/27 11:37:55 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/27 17:05:52 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <mlx.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <OpenCL/opencl.h>
 
 #include "libft.h"
 #include "structs.h"

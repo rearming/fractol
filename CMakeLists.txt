@@ -53,4 +53,5 @@ target_link_libraries(fractol
         "mlx"
         "-framework OpenGL"
         "-framework AppKit"
+        "-framework OpenCL"
         )

@@ -16,7 +16,7 @@ void		jump_to_left(t_mlx *mlx)
 {
 	mlx->mode = MANDELBROT;
 
-	mlx->mp.max_iters = 100;
+	mlx->max_iters = 100;
 	mlx->mp.left = -1.261241;
 	mlx->mp.top = -0.127016;
 	mlx->mp.xside = 0.0179815;
@@ -27,7 +27,7 @@ void		jump_mandel(t_mlx *mlx)
 {
 	mlx->mode = MANDELBROT;
 
-	mlx->mp.max_iters = 2000;
+	mlx->max_iters = 2000;
 	mlx->mp.left = -1.7433419064;
 	mlx->mp.top = 0.0000907670;
 	mlx->mp.xside = 0.00000000374;
@@ -38,7 +38,7 @@ void		jump_star(t_mlx *mlx)
 {
 	mlx->mode = MANDELBROT;
 
-	mlx->mp.max_iters = 10000;
+	mlx->max_iters = 10000;
 	mlx->mp.left = -0.777807810193171;
 	mlx->mp.top = 0.131645108003206;
 	mlx->mp.xside = 3.2 * 0.000000000000001;

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 10:42:33 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/27 11:45:14 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/27 16:01:38 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ void		print_mandel_params(t_mlx *mlx)
 	printf("\t\nSCALE:\n");
 	printf("X scale: [%Lf]\n", mlx->mp.xscale);
 	printf("Y scale: [%Lf]\n", mlx->mp.yscale);
+	printf("\t\nCOLOR'S MODS:\n");
+	printf("red: [%i]\n", mlx->rand[0]);
+	printf("green: [%i]\n", mlx->rand[1]);
+	printf("blue: [%i]\n", mlx->rand[2]);
 }
 
 void		print_params(t_mlx *mlx)
