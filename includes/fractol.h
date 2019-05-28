@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 17:56:23 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/28 18:26:31 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/28 18:59:21 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,15 @@ void		key_change_mandelbrot(t_mlx *mlx, int key_code);
 
 void		clear_image(t_mlx *mlx);
 void		image_put_pixel(t_image *img, t_point point, int color);
+
+/*
+**	complex math
+*/
+
+
+t_complex		complex_add(t_complex a, t_complex b);
+t_complex		complex_sqr(t_complex a);
+double			complex_sqrt(t_complex a);
 
 /*
 **	mandelbrot

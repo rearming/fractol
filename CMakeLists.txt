@@ -27,7 +27,7 @@ set(Sources
         debug/print_params.c
         sources/jumps.c
         sources/opencl_utils.c
-        sources/cl_gnl.c sources/hooks_mandelbrot.c sources/julia.c sources/hooks_julia.c)
+        sources/cl_gnl.c sources/hooks_mandelbrot.c sources/julia.c sources/hooks_julia.c sources/complex_math.c)
 
 set(mlx_includes
         /usr/local/include/)

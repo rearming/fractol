@@ -75,18 +75,15 @@ double			complex_sqrt(t_complex a)
 	return sqrt(a.x * a.x + a.y * a.y);
 }
 
-t_complex		map_point(t_point curr, double radius, int width, int height)
+t_complex		map_point(t_point curr, double radius, int width, int height,
+							double scale, double scale_x, double scale_y)
 {
 	t_complex		c;
-	double			scale_x;
-	double			scale_y;
 
-	scale_x = (double)width / height;
-	scale_y = (double)height / width;
 	c.x = 2 * radius * (curr.x - width / 2.0) / width;
 	c.y = 2 * radius * (curr.y - height / 2.0) / height;
-	c.x *= scale_x;
-	c.y *= scale_y;
+	c.x *= scale_x * scale;
+	c.y *= scale_y * scale;
 	return (c);
 }
 
@@ -104,7 +101,13 @@ __kernel void			julia(__global int *params, __global double *d_params,
 	int 			height;
 	int 			width;
 	int 			max_iters;
+
 	double			radius;
+	double			vert_shift;
+	double			hor_shift;
+	double			scale;
+	double 			scale_x;
+	double 			scale_y;
 	t_complex		c_part;
 
 	g_id = get_global_id(0);
@@ -113,19 +116,24 @@ __kernel void			julia(__global int *params, __global double *d_params,
 	width = params[1];
 	max_iters = params[2];
 
-	x = g_id % width;
-	y = g_id / height - 500;
-
 	c_part.x = d_params[0];
 	c_part.y = d_params[1];
 	radius = d_params[2];
+	vert_shift = d_params[3];
+	hor_shift = d_params[4];
+	scale = d_params[5];
+	scale_x = d_params[6];
+	scale_y = d_params[7];
+
+	x = g_id % width - hor_shift;
+	y = g_id / height - vert_shift;
 
 	iters = 0;
-	z0 = map_point((t_point){x, y, 0}, radius, width, height);
+	z0 = map_point((t_point){x, y, 0}, radius, width, height, scale, scale_x, scale_y);
 	while (iters <= max_iters)
 	{
 		z1 = complex_add(complex_sqr(z0), c_part);
-		if (complex_sqrt(z1) > radius)
+		if (z1.x * z1.x + z1.y * z1.y > radius * radius)
 		{
 			image_put_pixel(img, g_id, get_color(iters, max_iters, rand_params), width, height);
 			break ;

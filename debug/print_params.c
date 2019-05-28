@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 10:42:33 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/28 15:24:19 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/28 15:24:45 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void		print_mandel_params(t_mlx *mlx)
 {
 	printf("\n---------------------\n");
 	printf("MANDELBROT'S PARAMS:\n\n");
-	printf("left: [%.*f]\n", 20, mlx->mp.left);
-	printf("top: [%.*f]\n", 20, mlx->mp.top);
+	printf("hor_shift: [%.*f]\n", 20, mlx->mp.hor_shift);
+	printf("vert_shift: [%.*f]\n", 20, mlx->mp.vert_shift);
 	printf("X side: [%.*f]\n", 20, mlx->mp.xside);
 	printf("Y side: [%.*f]\n", 20, mlx->mp.yside);
 	printf("\t\nSCALE:\n");

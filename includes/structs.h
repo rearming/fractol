@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/28 16:52:41 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/28 19:35:52 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ typedef struct 			s_point
 
 typedef struct			s_mp
 {
-	double				top;
-	double				left;
+	double				vert_shift;
+	double				hor_shift;
 	double				xside;
 	double				yside;
 	double				xscale;
@@ -53,8 +53,13 @@ typedef struct 			s_jul
 {
 	t_complex 			c_part;
 	double				radius;
+	double 				scale;
+	double 				scale_x;
+	double 				scale_y;
 	int 				max_iters;
 	int 				is_frozen;
+	int 				vert_shift;
+	int 				hor_shift;
 }						t_jul;
 
 typedef struct			s_cl
@@ -96,7 +101,6 @@ typedef struct	s_gnl_fdf
 	char		buf[CL_BUFF_SIZE + 1];
 	int			read_res;
 	size_t		sum_len;
-	char		*result;
 }				t_gnl_fdf;
 
 #endif

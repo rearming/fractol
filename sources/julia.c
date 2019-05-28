@@ -6,17 +6,12 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 15:22:01 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/28 18:46:28 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/28 19:31:26 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "structs.h"
-
-double			complex_mod(double x, double y)
-{
-	return sqrt(x * x + y * y);
-}
 
 void			set_def_julia_params(t_mlx *mlx)
 {
@@ -26,34 +21,15 @@ void			set_def_julia_params(t_mlx *mlx)
 	mlx->rand[0] = 4;
 	mlx->rand[1] = 8;
 	mlx->rand[2] = 16;
-
+	mlx->jul.scale_x = (double)WIN_WIDTH / WIN_HEIGHT;
+	mlx->jul.scale_y = (double)WIN_HEIGHT / WIN_WIDTH;
 	mlx->jul.radius = 2;
 	mlx->jul.max_iters = 200;
+	mlx->jul.hor_shift = 0;
+	mlx->jul.vert_shift = 500;
+	mlx->jul.scale = 0.7;
 	mlx->jul.c_part.x = 0.2;
 	mlx->jul.c_part.y = 0.7;
-}
-
-t_complex		complex_add(t_complex a, t_complex b)
-{
-	t_complex c;
-
-	c.x = a.x + b.x;
-	c.y = a.y + b.y;
-	return (c);
-}
-
-t_complex		complex_sqr(t_complex a)
-{
-	t_complex c;
-
-	c.x = a.x * a.x - a.y * a.y;
-	c.y = 2 * a.x * a.y;
-	return c;
-}
-
-double			complex_sqrt(t_complex a)
-{
-	return sqrt(a.x * a.x + a.y * a.y);
 }
 
 t_complex		map_point(t_point curr, double radius)
@@ -78,7 +54,7 @@ void			calc_julia(t_point curr, t_mlx *mlx)
 	while (iters <= mlx->jul.max_iters)
 	{
 		z1 = complex_add(complex_sqr(z0), mlx->jul.c_part);
-		if (complex_sqrt(z1) > mlx->jul.radius)
+		if (z1.x * z1.x + z1.y * z1.y > mlx->jul.radius * mlx->jul.radius)
 		{
 			image_put_pixel(mlx->img, (t_point){curr.x, curr.y, 0}, get_color(iters, mlx));
 			break ;
