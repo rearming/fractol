@@ -6,7 +6,7 @@
 #    By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/10 23:20:41 by sleonard          #+#    #+#              #
-#    Updated: 2019/05/24 16:17:56 by sleonard         ###   ########.fr        #
+#    Updated: 2019/05/28 14:58:10 by sleonard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,10 @@ NAME =							\
 	fractol
 
 LIBFT =							\
-	./libft/
+	./libft/libft.a
+
+FT_PRINTF = 				\
+	./libft/ft_printf/
 
 MLX_LIB = 						\
 	/usr/local/lib/
@@ -37,15 +40,24 @@ MLX_INCL =						\
 FILES =							\
 	error.c						\
 	fractol.c					\
+	hooks.c						\
 	image.c						\
 	init.c						\
-	mandelbot.c					\
+	mandelbrot.c				\
+	hooks_mandelbrot.c			\
+	jumps.c						\
+	opencl_utils.c				\
+	cl_gnl.c					\
 
 OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
 
 COMP = gcc $(COMP_FLAGS) -I $(INCLUDES) -I $(LIBFT_INC) -I $(MLX_INCL)
 
-FRACTOL_FLAGS = -L $(LIBFT) -lft -L $(MLX_LIB) -lmlx -framework OpenGL -framework AppKit
+MLX_FRAMEWORK = -framework OpenGL -framework AppKit
+
+OPEN_CL_FRAMEWORK = -framework OpenCL
+
+FRACTOL_FLAGS = -L $(LIBFT_DIR) -lft -L $(FT_PRINTF) -lftprintf -L $(MLX_LIB) -lmlx $(MLX_FRAMEWORK) $(OPEN_CL_FRAMEWORK)
 
 all : $(NAME)
 
@@ -56,15 +68,15 @@ $(OBJ_DIR) :
 	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c
-	@$(COMP) -c $< -o $@
+	$(COMP) -c $< -o $@
 
 clean :
 	@rm -rf $(OBJ_DIR)
-	@make clean -C $(LIBFT)
+	@make clean -C $(LIBFT_DIR)
 
 fclean : clean
 	@rm -rf $(NAME)
-	@make fclean -C $(LIBFT)
+	@make fclean -C $(LIBFT_DIR)
 
 re : fclean $(NAME)
 
@@ -79,4 +91,5 @@ LIBFT_INC = 			\
 	./libft/includes/	\
 
 $(LIBFT) :
-	@make -C $(LIBFT)
+	@make -C $(LIBFT_DIR)
+	@make printf -C $(LIBFT_DIR)

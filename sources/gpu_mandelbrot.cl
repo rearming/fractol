@@ -1,3 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gpu_mandelbrot.cl                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/28 16:56:42 by sleonard          #+#    #+#             */
+/*   Updated: 2019/05/28 16:56:42 by sleonard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+typedef struct	s_point
+{
+	int 		x;
+	int 		y;
+}				t_point;
+
 void		image_put_pixel(__global int *img, size_t pos,
 							int color, int width, int height)
 {
@@ -34,20 +52,14 @@ __kernel void		mandelbrot(__global int *params, __global double *d_params,
 	int 			iters;
 
 	int				color;
-
 	int				height;
 	int				width;
 	int				max_iters;
-	int4			rand;
 	size_t			g_id;
 
-	int				x;
-	int				y;
-
+	t_point			curr;
 	double			top;
 	double			left;
-	double			xside;
-	double			yside;
 	double			xscale;
 	double			yscale;
 
@@ -57,18 +69,16 @@ __kernel void		mandelbrot(__global int *params, __global double *d_params,
 	width = params[1];
 	max_iters = params[2];
 
-	x = g_id % width;
-	y = g_id / height;
+	curr.x = g_id % width;
+	curr.y = g_id / height;
 
 	top = d_params[0];
 	left = d_params[1];
-	xside = d_params[2];
-	yside = d_params[3];
 	xscale = d_params[4];
 	yscale = d_params[5];
 
-	cx = x * xscale + left;
-	cy = y * yscale + top;	//todo y - 1?
+	cx = curr.x * xscale + left;
+	cy = curr.y * yscale + top;
 	zx = 0;
 	zy = 0;
 	iters = 0;

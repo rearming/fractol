@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 17:56:11 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/28 12:18:48 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/28 18:33:53 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,14 @@ void		render_fractal(t_mlx *mlx, char *name)
 	if (ft_strstr(name, "mandelbrot"))
 	{
 		set_def_mand_params(mlx);
-		render(mlx, mlx->render_mode);
-		print_params(mlx);
-		//mandelbrot(mlx);
-		//mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
+		mlx->cl = cl_init(mlx);
+		mandelbrot_render(mlx);
+	}
+	if (ft_strstr(name, "julia"))
+	{
+		set_def_julia_params(mlx);
+		mlx->cl = cl_init(mlx);
+		julia_render(mlx);
 	}
 }
 
@@ -31,9 +35,9 @@ int 		main(int argc, char **argv)
 	mlx = ft_mlx_init();
 	if (argc != 2)
 		raise_error(ERR_USAGE);
-	mlx->cl = cl_init(mlx);
 	render_fractal(mlx, argv[1]);
 	mlx_hook(mlx->win, 2, 0, &key_hook, mlx);
+	mlx_hook(mlx->win, 6, 0, &mouse_move, mlx);
 	mlx_hook(mlx->win, 17, 0, &cross_hook, mlx);
 	mlx_loop(mlx->mlx);
 	return (0);

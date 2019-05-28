@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 17:56:23 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/28 12:13:30 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/28 18:26:31 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 **	main
 */
 
-
+void		render_fractal(t_mlx *mlx, char *name);
 
 /*
 **	init
@@ -42,7 +42,7 @@ t_mlx		*ft_mlx_init(void);
 **	Open CL init
 */
 
-t_cl		cl_init(t_mlx *mlx);
+t_cl cl_init(t_mlx *mlx);
 char		*cl_gnl(int fd);
 
 
@@ -50,15 +50,15 @@ char		*cl_gnl(int fd);
 **	Open CL utils
 */
 
-void		cl_fill_buffer(t_mlx *mlx);
+void		cl_fill_mandelbrot_buffer(t_mlx *mlx);
 void		cl_run_kernels(t_mlx *mlx);
 
 /*
 ** Open CL render
 */
 
-void render(t_mlx *mlx, int mode);
-
+void		mandelbrot_render(t_mlx *mlx);
+void		julia_render(t_mlx *mlx);
 /*
 **	error
 */
@@ -67,11 +67,17 @@ void		raise_error(int code);
 void		show_usage(void);
 
 /*
-**	hook
+**	hooks utils
 */
 
 int 		cross_hook(void *param);
 int 		key_hook(int key_code, void *param);
+int			mouse_move(int x, int y, void *param);
+/*
+**	hooks mandlelbrot
+*/
+
+void		key_change_mandelbrot(t_mlx *mlx, int key_code);
 
 /*
 **	image
@@ -88,6 +94,7 @@ void		mandelbrot(t_mlx *mlx);
 void		calc_mandelbrot(t_point curr, t_mlx *mlx);
 void		set_def_mand_params(t_mlx *mlx);
 void		set_mandel_params(t_mlx *mlx);
+int 		get_color(int iters, t_mlx *mlx);
 
 /*
 **	debug
@@ -104,5 +111,19 @@ void		jump_to_left(t_mlx *mlx);
 void		jump_mandel(t_mlx *mlx);
 void		jump_star(t_mlx *mlx);
 void		jump_maelstorm(t_mlx *mlx);
+
+/*
+**	julia
+*/
+
+void		set_def_julia_params(t_mlx *mlx);
+void		julia(t_mlx *mlx);
+
+/*
+**	julia hooks
+*/
+
+void		mouse_change_julia(t_mlx *mlx, t_point pos);
+void		key_change_julia(t_mlx *mlx, int keycode);
 
 #endif

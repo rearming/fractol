@@ -6,12 +6,18 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/28 11:50:56 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/28 16:52:41 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+typedef struct 			s_complex
+{
+	double 				x;
+	double 				y;
+}						t_complex;
 
 typedef struct			s_image
 {
@@ -32,16 +38,24 @@ typedef struct 			s_point
 
 typedef struct			s_mp
 {
-	double			top;
-	double			left;
-	double			xside;
-	double			yside;
-	double			xscale;
-	double			yscale;
-	double 			scale_x;
-	double 			scale_y;
-
+	double				top;
+	double				left;
+	double				xside;
+	double				yside;
+	double				xscale;
+	double				yscale;
+	double				scale_x;
+	double				scale_y;
+	int					max_iters;
 }						t_mp;
+
+typedef struct 			s_jul
+{
+	t_complex 			c_part;
+	double				radius;
+	int 				max_iters;
+	int 				is_frozen;
+}						t_jul;
 
 typedef struct			s_cl
 {
@@ -66,9 +80,9 @@ typedef struct			s_mlx
 	void				*win;
 	t_image				*img;
 	int 				mode;
-	int					max_iters;
 	int 				rand[3];
 	t_mp				mp;
+	t_jul				jul;
 	t_cl				cl;
 	int 				render_mode;
 }						t_mlx;

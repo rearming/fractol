@@ -34,5 +34,5 @@ void		raise_error(int code)
 void		show_usage(void)
 {
 	ft_printf("Usage: ./fractol [fractal type]\n");
-	ft_printf("\tFor example: ./fractol mandelbrot");
+	ft_printf("\tFor example: ./fractol mandelbrot\n");
 }

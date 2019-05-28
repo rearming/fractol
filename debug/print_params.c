@@ -6,11 +6,12 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 10:42:33 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/28 11:22:43 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/28 15:24:19 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include "structs.h"
 
 void		print_mandel_params(t_mlx *mlx)
 {
@@ -28,12 +29,11 @@ void		print_mandel_params(t_mlx *mlx)
 	printf("green: [%i]\n", mlx->rand[1]);
 	printf("blue: [%i]\n", mlx->rand[2]);
 	printf("\t\nMAX ITERS:\n");
-	printf("[%i]\n", mlx->max_iters);
+	printf("[%i]\n", mlx->mp.max_iters);
 }
 
 void		print_params(t_mlx *mlx)
 {
 	if (mlx->mode == MANDELBROT)
 		print_mandel_params(mlx);
-
 }
