@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 17:56:11 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/27 21:07:17 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/28 12:18:48 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ void		render_fractal(t_mlx *mlx, char *name)
 	if (ft_strstr(name, "mandelbrot"))
 	{
 		set_def_mand_params(mlx);
-		render(mlx);
+		render(mlx, mlx->render_mode);
+		print_params(mlx);
 		//mandelbrot(mlx);
+		//mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
 	}
 }
 

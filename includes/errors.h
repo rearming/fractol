@@ -14,7 +14,7 @@
 # define ERRORS_H
 
 # define ERR_INV_FILE 4
-# define ERR_INV_ARGS 5
+# define ERR_INV_ARGS 6666
 # define ERR_INV_MAP 6
 # define ERR_MALLOC 7
 # define ERR_MLX_INIT 42

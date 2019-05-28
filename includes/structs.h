@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/27 20:11:23 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/28 11:50:56 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,14 @@ typedef struct 			s_point
 
 typedef struct			s_mp
 {
-	double			xside;
 	double			top;
 	double			left;
+	double			xside;
 	double			yside;
 	double			xscale;
 	double			yscale;
+	double 			scale_x;
+	double 			scale_y;
 
 }						t_mp;
 
@@ -68,6 +70,7 @@ typedef struct			s_mlx
 	int 				rand[3];
 	t_mp				mp;
 	t_cl				cl;
+	int 				render_mode;
 }						t_mlx;
 
 #define CL_BUFF_SIZE 10000

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 14:48:09 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/27 20:11:23 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/28 12:13:30 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,14 @@ void			set_def_mand_params(t_mlx *mlx)
 	mlx->rand[1] = 8;
 	mlx->rand[2] = 16;
 
+	mlx->render_mode = GPU_RENDER;
+	mlx->mp.scale_x = (double)WIN_WIDTH / WIN_HEIGHT;
+	mlx->mp.scale_y = (double)WIN_HEIGHT / WIN_WIDTH;
 	mlx->max_iters = 200;
 	mlx->mp.left = -2.15;
 	mlx->mp.top = -1.15;
-	mlx->mp.xside = 4.5;
-	mlx->mp.yside = 3.0;
+	mlx->mp.xside = 2.0 * mlx->mp.scale_x;
+	mlx->mp.yside = 2.0 * mlx->mp.scale_y;
 	mlx->mp.xscale = mlx->mp.xside / WIN_WIDTH;
 	mlx->mp.yscale = mlx->mp.yside / WIN_HEIGHT;
 }
@@ -36,33 +39,15 @@ void			set_def_mand_params(t_mlx *mlx)
 
 int 			get_color(int iters, t_mlx *mlx)
 {
-	int color;
 	int red;
 	int green;
 	int blue;
-
-	/*red = color >> 16 & 0xFF * (ft_abs(((long double)(iters - mlx->max_iters) / mlx->max_iters) * 255));
-	green = color >> 8 & 0xFF * (ft_abs(((long double)(iters - mlx->max_iters) / mlx->max_iters) * 255));
-	blue = color & 0xFF * (ft_abs(((long double)(iters - mlx->max_iters) / mlx->max_iters) * 255));*/
-
-	/*red = mlx->max_iters - iters;
-	green = mlx->max_iters - iters;
-	blue = mlx->max_iters - iters;*/
-
-	/*red = 255 - 13 * iters;
-	green = 255 - 9 * iters;
-	blue = 255 - 7 * iters;*/
-
-/*	red = iters % mlx->rand[0] * 64;
-	green = iters % mlx->rand[1] * 32;
-	blue = iters % mlx->rand[2] * 16;*/
 
 	if (iters == mlx->max_iters)
 		return (BLACK);
 	red = iters % mlx->rand[0] * 64;
 	green = iters % mlx->rand[1] * 32;
 	blue = iters % mlx->rand[2] * 16;
-
 	return (red << 16 | green << 8 | blue);
 }
 
@@ -96,18 +81,20 @@ void			calc_mandelbrot(t_point curr, t_mlx *mlx)
 void			mandelbrot(t_mlx *mlx)
 {
 	t_point		curr;
+	long 		count;
 
 	curr = (t_point){0, 0, 0, 0};
 	curr.x = 0;
-	//put_cl_args(mlx);
-	//clNDRRangeKernel(10348031581305, WIN_HEIGHT * WIN_WIDTH);
-	while (curr.x <= WIN_WIDTH)
+
+	count = 0;
+	while (curr.x < WIN_WIDTH)
 	{
 		curr.y = 0;
-		while (curr.y <= WIN_HEIGHT)
+		while (curr.y < WIN_HEIGHT)
 		{
 			calc_mandelbrot(curr, mlx);
 			curr.y++;
+			count++;
 		}
 		curr.x++;
 	}

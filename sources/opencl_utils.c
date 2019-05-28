@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 17:10:01 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/27 21:03:15 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/28 12:18:29 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ t_cl		cl_init(t_mlx *mlx)
 	cl.context = clCreateContext(NULL, 1, &cl.device_id, NULL, NULL, &ret);
 	cl.queue = clCreateCommandQueue(cl.context, cl.device_id, 0, &ret);
 
-	cl_file = cl_gnl(open("/Users/sleonard/7_day/fractol/sources/calc_mandel.cl", O_RDONLY));
+	cl_file = cl_gnl(open("/Users/sleonard/7_day/fractol/sources/cl_mandelbrot.cl", O_RDONLY));
 	size = ft_strlen(cl_file);
 	cl.program = clCreateProgramWithSource(cl.context, 1, (const char **)&cl_file, &size, &ret);
 
 	ret = clBuildProgram(cl.program, 1, &cl.device_id, NULL, NULL, NULL);
 
-	cl.kernel = clCreateKernel(cl.program, "test", &ret);
+	cl.kernel = clCreateKernel(cl.program, "mandelbrot", &ret);
 
 	cl.params = clCreateBuffer(cl.context, CL_MEM_READ_WRITE, sizeof(int) * 10, NULL, &ret);
 	cl.double_params = clCreateBuffer(cl.context, CL_MEM_READ_WRITE, sizeof(double) * 6, NULL, &ret);
@@ -48,7 +48,7 @@ t_cl		cl_init(t_mlx *mlx)
 	return (cl);
 }
 
-void 		cl_fill_buffer(t_mlx *mlx)
+void		cl_fill_buffer(t_mlx *mlx)
 {
 	int 	params[10];
 
@@ -66,30 +66,34 @@ void 		cl_fill_buffer(t_mlx *mlx)
 			sizeof(int) * 3, &mlx->rand, 0, NULL, NULL);
 }
 
-void 	cl_run_kernels(t_mlx *mlx)
+void		cl_run_kernels(t_mlx *mlx)
 {
 	size_t 	kern_num;
 	int		ret;
 
-	kern_num = 1; // number of pixels in image
-					// todo gid = get_global_id(0); (find kernel number = pixel on window)
-	ret = clEnqueueNDRangeKernel(mlx->cl.queue, mlx->cl.kernel, 1, NULL, &kern_num, NULL, 0, NULL, NULL);
+	kern_num = WIN_HEIGHT * WIN_WIDTH;
+	ret = clEnqueueNDRangeKernel(mlx->cl.queue, mlx->cl.kernel, 1,
+			NULL, &kern_num, NULL, 0, NULL, NULL);
+	if (ret)
+		raise_error(ERR_OPENCL);
 }
 
-void		render(t_mlx *mlx)
+void		render(t_mlx *mlx, int mode)
 {
 	int 	ret;
 
-	cl_fill_buffer(mlx);
-	cl_run_kernels(mlx);
-
-	ret = clEnqueueReadBuffer(mlx->cl.queue, mlx->cl.mem_img, CL_TRUE, 0,
-			sizeof(int) * WIN_WIDTH * WIN_HEIGHT, mlx->img->data, 0, NULL, NULL);
-	if (ret)
-		raise_error(ERR_OPENCL);
-
+	if (mode == GPU_RENDER)
+	{
+		cl_fill_buffer(mlx);
+		cl_run_kernels(mlx);
+		ret = clEnqueueReadBuffer(mlx->cl.queue, mlx->cl.mem_img, CL_TRUE, 0,
+								  sizeof(int) * WIN_WIDTH * WIN_HEIGHT, mlx->img->data, 0, NULL, NULL);
+		if (ret)
+			raise_error(ERR_OPENCL);
+	}
+	if (mode == CPU_RENDER)
+	{
+		mandelbrot(mlx);
+	}
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
-
-	printf("BANANA\n");
-
 }

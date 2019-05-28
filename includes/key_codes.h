@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:56:01 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/27 11:32:49 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/28 12:21:14 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define ESC 53
 # define SPACE 49
 # define I 34
+# define G 5
 # define C 8
 # define R 15
 # define J 38
