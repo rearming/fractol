@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 17:10:27 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/28 16:53:50 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/29 14:41:09 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int 		is_action_key(int keycode)
 	|| keycode == NUM_PLUS || keycode == NUM_MINUS
 	|| keycode == NUM_LEFT || keycode == NUM_RIGHT
 	|| keycode == NUM_UP || keycode == NUM_DOWN
-	|| keycode == J || keycode == R
+	|| keycode == J || keycode == R || keycode == N
 	|| keycode == C || keycode == G || keycode == SPACE)
 		return (1);
 	return (0);
@@ -37,8 +37,22 @@ int			mouse_move(int x, int y, void *param)
 	t_mlx		*mlx;
 
 	mlx = (t_mlx*)param;
-	if (mlx->mode == JULIA && !mlx->jul.is_frozen)
+	if (mlx->mode == JULIA)
 		mouse_change_julia(mlx, (t_point){x, y, 0, 0});
+	if (mlx->mode == MANDELBROT)
+		mouse_change_mandelbort((t_point){x, y, 0, 0}, mlx);
+	return (0);
+}
+
+int			mouse_action(int button_code, int x, int y, void *param)
+{
+	t_mlx		*mlx;
+
+	mlx = (t_mlx*)param;
+	if (mlx->mode == MANDELBROT)
+		mouse_action_mandelbrot(mlx, button_code);
+	if (mlx->mode == JULIA)
+		mouse_action_julia(mlx, button_code);
 	return (0);
 }
 

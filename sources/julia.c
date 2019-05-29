@@ -25,7 +25,7 @@ void			set_def_julia_params(t_mlx *mlx)
 	mlx->jul.scale_y = (double)WIN_HEIGHT / WIN_WIDTH;
 	mlx->jul.radius = 2;
 	mlx->jul.max_iters = 200;
-	mlx->jul.hor_shift = 0;
+	mlx->jul.hor_shift = 1;
 	mlx->jul.vert_shift = 500;
 	mlx->jul.scale = 0.7;
 	mlx->jul.c_part.x = 0.2;

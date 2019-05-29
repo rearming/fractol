@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 17:10:01 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/28 19:31:15 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/29 11:50:49 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,19 @@ t_cl		cl_init(t_mlx *mlx)
 		raise_error(ERR_OPENCL);
 	cl.context = clCreateContext(NULL, 1, &cl.device_id, NULL, NULL, &ret);
 	cl.queue = clCreateCommandQueue(cl.context, cl.device_id, 0, &ret);
-
 	if (mlx->mode == MANDELBROT)
 		cl_file = cl_gnl(open("/Users/sleonard/7_day/fractol/sources/gpu_mandelbrot.cl", O_RDONLY));
 	if (mlx->mode == JULIA)
 		cl_file = cl_gnl(open("/Users/sleonard/7_day/fractol/sources/gpu_julia.cl", O_RDONLY));
 	size = ft_strlen(cl_file);
 	cl.program = clCreateProgramWithSource(cl.context, 1, (const char **)&cl_file, &size, &ret);
-
-	ret = clBuildProgram(cl.program, 1, &cl.device_id, NULL, NULL, NULL);
+	if ((ret = clBuildProgram(cl.program, 1, &cl.device_id, NULL, NULL, NULL)))
+		raise_error(ERR_OPENCL);
 	if (mlx->mode == MANDELBROT)
 		cl.kernel = clCreateKernel(cl.program, "mandelbrot", &ret);
 	if (mlx->mode == JULIA)
 		cl.kernel = clCreateKernel(cl.program, "julia", &ret);
 	cl_set_kernel(&cl);
-	if (ret)
-		raise_error(ERR_OPENCL);
 	free(cl_file);
 	return (cl);
 }
@@ -139,6 +136,8 @@ void		mandelbrot_render(t_mlx *mlx)
 {
 	int 	ret;
 
+	mlx->mp.xscale = (mlx->mp.xside / WIN_WIDTH);
+	mlx->mp.yscale = (mlx->mp.yside / WIN_HEIGHT);
 	if (mlx->render_mode == GPU_RENDER)
 	{
 		cl_fill_mandelbrot_buffer(mlx);

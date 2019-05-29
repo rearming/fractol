@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:56:01 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/28 12:21:14 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/29 14:40:37 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define C 8
 # define R 15
 # define J 38
+# define N 45
 
 # define ARR_UP 126
 # define ARR_LEFT 123
@@ -33,5 +34,8 @@
 # define NUM_RIGHT 88
 # define NUM_UP 91
 # define NUM_DOWN 84
+
+# define SCROLL_UP 4
+# define SCROLL_DOWN 5
 
 #endif

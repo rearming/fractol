@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 11:24:15 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/28 15:24:52 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/29 11:06:55 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void		jump_star(t_mlx *mlx)
 void		jump_maelstorm(t_mlx *mlx)
 {
 	mlx->mode = MANDELBROT;
-	mlx->mp.max_iters = 1000;
+	mlx->mp.max_iters = 500;
 
 	mlx->mp.hor_shift = -1.96680095;
 	mlx->mp.vert_shift = 0.00000478;

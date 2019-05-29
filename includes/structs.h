@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/28 19:35:52 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/29 10:36:30 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct			s_mp
 	double				yscale;
 	double				scale_x;
 	double				scale_y;
+	double 				x_zoom;
+	double 				y_zoom;
 	int					max_iters;
 }						t_mp;
 
@@ -60,6 +62,8 @@ typedef struct 			s_jul
 	int 				is_frozen;
 	int 				vert_shift;
 	int 				hor_shift;
+	double 				x_zoom;
+	double 				y_zoom;
 }						t_jul;
 
 typedef struct			s_cl

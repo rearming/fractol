@@ -25,4 +25,7 @@
 #define CPU_RENDER 4000
 #define GPU_RENDER 5000
 
+#define IN 0
+#define OUT 1
+
 #endif

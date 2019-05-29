@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 17:56:23 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/28 18:59:21 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/29 13:09:10 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,8 @@ t_mlx		*ft_mlx_init(void);
 **	Open CL init
 */
 
-t_cl cl_init(t_mlx *mlx);
+t_cl		cl_init(t_mlx *mlx);
 char		*cl_gnl(int fd);
-
 
 /*
 **	Open CL utils
@@ -59,6 +58,7 @@ void		cl_run_kernels(t_mlx *mlx);
 
 void		mandelbrot_render(t_mlx *mlx);
 void		julia_render(t_mlx *mlx);
+
 /*
 **	error
 */
@@ -73,11 +73,7 @@ void		show_usage(void);
 int 		cross_hook(void *param);
 int 		key_hook(int key_code, void *param);
 int			mouse_move(int x, int y, void *param);
-/*
-**	hooks mandlelbrot
-*/
-
-void		key_change_mandelbrot(t_mlx *mlx, int key_code);
+int			mouse_action(int button_code, int x, int y, void *param);
 
 /*
 **	image
@@ -102,8 +98,16 @@ double			complex_sqrt(t_complex a);
 void		mandelbrot(t_mlx *mlx);
 void		calc_mandelbrot(t_point curr, t_mlx *mlx);
 void		set_def_mand_params(t_mlx *mlx);
-void		set_mandel_params(t_mlx *mlx);
 int 		get_color(int iters, t_mlx *mlx);
+
+/*
+**	hooks mandlelbrot
+*/
+
+void		key_change_mandelbrot(t_mlx *mlx, int key_code);
+void		mouse_change_mandelbort(t_point pos, t_mlx *mlx);
+void		mouse_action_mandelbrot(t_mlx *mlx, int button_code);
+void		zoom_mandelbrot(t_mlx *mlx, int mode);
 
 /*
 **	debug
@@ -134,5 +138,6 @@ void		julia(t_mlx *mlx);
 
 void		mouse_change_julia(t_mlx *mlx, t_point pos);
 void		key_change_julia(t_mlx *mlx, int keycode);
+void		mouse_action_julia(t_mlx *mlx, int button_code);
 
 #endif
