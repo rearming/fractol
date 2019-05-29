@@ -40,7 +40,7 @@ int 				get_color(int iters, int max_iters, __global int *rand_params)
 
 	if (iters == max_iters)
 		return (0x000000);
-	red = iters % rand_params[0] * 64;
+	red = iters % rand_params[0] * 32;
 	green = iters % rand_params[1] * 32;
 	blue = iters % rand_params[2] * 16;
 
@@ -80,8 +80,8 @@ t_complex		map_point(t_point curr, double radius, int width, int height,
 {
 	t_complex		c;
 
-	c.x = 2 * radius * (curr.x - width / 2.0) / width;
-	c.y = 2 * radius * (curr.y - height / 2.0) / height;
+	c.x = radius * (curr.x - width / 2.0) / width;
+	c.y = radius * (curr.y - height / 2.0) / height;
 	c.x *= scale_x * scale;
 	c.y *= scale_y * scale;
 	return (c);
@@ -126,7 +126,7 @@ __kernel void			julia(__global int *params, __global double *d_params,
 	scale_y = d_params[7];
 
 	x = g_id % width - hor_shift / (scale);
-	y = g_id / height - vert_shift / (scale);
+	y = g_id / height - vert_shift / (scale * 2);
 
 	iters = 0;
 	z0 = map_point((t_point){x, y, 0}, radius, width, height, scale, scale_x, scale_y);

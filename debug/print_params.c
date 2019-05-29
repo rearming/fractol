@@ -34,6 +34,6 @@ void		print_mandel_params(t_mlx *mlx)
 
 void		print_params(t_mlx *mlx)
 {
-	if (mlx->mode == MANDELBROT)
+	if (mlx->frac_type == MANDELBROT)
 		print_mandel_params(mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 17:10:27 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/29 14:41:09 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/29 21:18:10 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,11 @@ int			mouse_move(int x, int y, void *param)
 	t_mlx		*mlx;
 
 	mlx = (t_mlx*)param;
-	if (mlx->mode == JULIA)
+	if (mlx->term.command == LISTEN)
+		return (0);
+	if (mlx->frac_type == JULIA)
 		mouse_change_julia(mlx, (t_point){x, y, 0, 0});
-	if (mlx->mode == MANDELBROT)
+	if (mlx->frac_type == MANDELBROT)
 		mouse_change_mandelbort((t_point){x, y, 0, 0}, mlx);
 	return (0);
 }
@@ -47,11 +49,15 @@ int			mouse_move(int x, int y, void *param)
 int			mouse_action(int button_code, int x, int y, void *param)
 {
 	t_mlx		*mlx;
+	t_point		pos;
 
+	pos = (t_point){x, y, 0, 0};
 	mlx = (t_mlx*)param;
-	if (mlx->mode == MANDELBROT)
+	if (mlx->term.command == LISTEN)
+		return (0);
+	if (mlx->frac_type == MANDELBROT)
 		mouse_action_mandelbrot(mlx, button_code);
-	if (mlx->mode == JULIA)
+	if (mlx->frac_type == JULIA)
 		mouse_action_julia(mlx, button_code);
 	return (0);
 }
@@ -64,9 +70,21 @@ int 		key_hook(int key_code, void *param)
 	//printf("key code: [%i]\n", key_code);
 	if (key_code == ESC)
 		exit(0);
-	if (mlx->mode == MANDELBROT && is_action_key(key_code))
+	if (key_code == SHIFT)
+	{
+		printf("Shift pressed!\n");
+		mlx->term.command = PREPARE;
+		return (0);
+	}
+	if ((key_code == COLON && mlx->term.command == PREPARE)
+				|| mlx->term.command == LISTEN)
+	{
+		parse_term_input(mlx, key_code);
+		return (0);
+	}
+	if (mlx->frac_type == MANDELBROT && is_action_key(key_code))
 		key_change_mandelbrot(mlx, key_code);
-	if (mlx->mode == JULIA && is_action_key(key_code))
+	if (mlx->frac_type == JULIA && is_action_key(key_code))
 		key_change_julia(mlx, key_code);
 	return (0);
 }

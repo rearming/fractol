@@ -38,16 +38,19 @@ MLX_INCL =						\
 	/usr/local/include/
 
 FILES =							\
-	error.c						\
-	fractol.c					\
-	hooks.c						\
-	image.c						\
-	init.c						\
-	mandelbrot.c				\
-	hooks_mandelbrot.c			\
-	jumps.c						\
-	opencl_utils.c				\
-	cl_gnl.c					\
+		error.c					\
+		fractol.c				\
+		image.c					\
+		init.c					\
+		mandelbrot.c			\
+		hooks.c					\
+		jumps.c					\
+		opencl_utils.c			\
+		cl_gnl.c				\
+		hooks_mandelbrot.c		\
+		julia.c					\
+		hooks_julia.c			\
+		complex_math.c			\
 
 OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
 

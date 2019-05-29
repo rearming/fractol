@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:18:44 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/23 19:13:12 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/29 20:05:13 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ t_mlx		*ft_mlx_init(void)
 			&mlx->img->bpp, &mlx->img->line_size, &mlx->img->endian)))
 		raise_error(ERR_MLX_IMG_DATA);
 	mlx->img->bpp /= 8;
+	mlx->term = (t_erm){{0}, 0, 0};
 	return (mlx);
 }

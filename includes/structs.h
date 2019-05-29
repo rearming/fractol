@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/29 10:36:30 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/29 20:04:28 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,17 @@ typedef struct 			s_point
 	int 				z;
 	int 				color;
 }						t_point;
+
+typedef struct	s_line
+{
+	t_point		start;
+	t_point		end;
+	t_point		point;
+	t_point		delta;
+	int			steep;
+	int			error;
+	int			ystep;
+}				t_line;
 
 typedef struct			s_mp
 {
@@ -66,6 +77,13 @@ typedef struct 			s_jul
 	double 				y_zoom;
 }						t_jul;
 
+typedef struct			s_erm
+{
+	char 				buff[100];
+	int 				i;
+	int 				command;
+}						t_erm;
+
 typedef struct			s_cl
 {
 	cl_context			context;
@@ -76,7 +94,6 @@ typedef struct			s_cl
 	cl_device_id		device_id;
 	cl_program			program;
 	cl_kernel			kernel;
-
 	cl_mem				mem_img;
 	cl_mem				params;
 	cl_mem 				double_params;
@@ -88,12 +105,13 @@ typedef struct			s_mlx
 	void				*mlx;
 	void				*win;
 	t_image				*img;
-	int 				mode;
+	int 				frac_type;
 	int 				rand[3];
 	t_mp				mp;
 	t_jul				jul;
 	t_cl				cl;
-	int 				render_mode;
+	t_erm				term;
+	int 				rend_device;
 }						t_mlx;
 
 #define CL_BUFF_SIZE 10000

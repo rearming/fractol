@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 14:48:09 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/28 19:18:58 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/29 19:40:26 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 
 void			set_def_mand_params(t_mlx *mlx)
 {
-	mlx->mode = MANDELBROT;
+	mlx->frac_type = MANDELBROT;
 
 	mlx->rand[0] = 4;
 	mlx->rand[1] = 8;
 	mlx->rand[2] = 16;
 
-	mlx->render_mode = GPU_RENDER;
+	mlx->rend_device = GPU_RENDER;
 	mlx->mp.scale_x = (double)WIN_WIDTH / WIN_HEIGHT;
 	mlx->mp.scale_y = (double)WIN_HEIGHT / WIN_WIDTH;
 	mlx->mp.max_iters = 200;
@@ -44,7 +44,7 @@ int 			get_color(int iters, t_mlx *mlx)
 
 	if (iters == mlx->mp.max_iters)
 		return (BLACK);
-	red = iters % mlx->rand[0] * 64;
+	red = iters % mlx->rand[0] * 24;
 	green = iters % mlx->rand[1] * 32;
 	blue = iters % mlx->rand[2] * 16;
 	return (red << 16 | green << 8 | blue);

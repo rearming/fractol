@@ -15,7 +15,7 @@
 
 void		jump_to_left(t_mlx *mlx)
 {
-	mlx->mode = MANDELBROT;
+	mlx->frac_type = MANDELBROT;
 
 	mlx->mp.max_iters = 100;
 	mlx->mp.hor_shift = -1.261241;
@@ -26,7 +26,7 @@ void		jump_to_left(t_mlx *mlx)
 
 void		jump_mandel(t_mlx *mlx)
 {
-	mlx->mode = MANDELBROT;
+	mlx->frac_type = MANDELBROT;
 
 	mlx->mp.max_iters = 500;
 	mlx->mp.hor_shift = -1.7433419064;
@@ -37,7 +37,7 @@ void		jump_mandel(t_mlx *mlx)
 
 void		jump_star(t_mlx *mlx)
 {
-	mlx->mode = MANDELBROT;
+	mlx->frac_type = MANDELBROT;
 
 	mlx->mp.max_iters = 10000;
 	mlx->mp.hor_shift = -0.777807810193171;
@@ -48,7 +48,7 @@ void		jump_star(t_mlx *mlx)
 
 void		jump_maelstorm(t_mlx *mlx)
 {
-	mlx->mode = MANDELBROT;
+	mlx->frac_type = MANDELBROT;
 	mlx->mp.max_iters = 500;
 
 	mlx->mp.hor_shift = -1.96680095;

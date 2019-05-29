@@ -34,7 +34,7 @@ int 				get_color(int iters, int max_iters, __global int *rand_params)
 
 	if (iters == max_iters)
 		return (0x000000);
-	red = iters % rand_params[0] * 64;
+	red = iters % rand_params[0] * 24;
 	green = iters % rand_params[1] * 32;
 	blue = iters % rand_params[2] * 16;
 

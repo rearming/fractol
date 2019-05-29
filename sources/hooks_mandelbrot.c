@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 15:03:13 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/29 13:09:10 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/29 18:47:55 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ void		zoom_mandelbrot(t_mlx *mlx, int mode)
 void		key_change_mandelbrot(t_mlx *mlx, int key_code)
 {
 	if (key_code == G)
-		mlx->render_mode = GPU_RENDER;
+		mlx->rend_device = GPU_RENDER;
 	if (key_code == C)
-		mlx->render_mode = CPU_RENDER;
+		mlx->rend_device = CPU_RENDER;
 	if (key_code == J)
 	{
 		//jump_to_left(mlx);
-		//jump_mandel(mlx);
+		jump_mandel(mlx);
 		//jump_star(mlx);
-		jump_maelstorm(mlx);
+		//jump_maelstorm(mlx);
 	}
 	if (key_code == R)
 	{

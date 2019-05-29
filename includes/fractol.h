@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 17:56:23 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/29 13:09:10 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/29 20:50:30 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,13 @@ void		show_usage(void);
 int 		cross_hook(void *param);
 int 		key_hook(int key_code, void *param);
 int			mouse_move(int x, int y, void *param);
-int			mouse_action(int button_code, int x, int y, void *param);
+int			mouse_action(int button_code, int y, int x, void *param);
+
+/*
+**	terminal
+*/
+
+void		parse_term_input(t_mlx *mlx, int key);
 
 /*
 **	image
@@ -83,13 +89,19 @@ void		clear_image(t_mlx *mlx);
 void		image_put_pixel(t_image *img, t_point point, int color);
 
 /*
+**	bresenham line
+*/
+
+void		bresen_line(t_mlx *mlx, t_point start, t_point end);
+
+/*
 **	complex math
 */
 
 
-t_complex		complex_add(t_complex a, t_complex b);
-t_complex		complex_sqr(t_complex a);
-double			complex_sqrt(t_complex a);
+t_complex	complex_add(t_complex a, t_complex b);
+t_complex	complex_sqr(t_complex a);
+double		complex_sqrt(t_complex a);
 
 /*
 **	mandelbrot
@@ -139,5 +151,7 @@ void		julia(t_mlx *mlx);
 void		mouse_change_julia(t_mlx *mlx, t_point pos);
 void		key_change_julia(t_mlx *mlx, int keycode);
 void		mouse_action_julia(t_mlx *mlx, int button_code);
+
+
 
 #endif
