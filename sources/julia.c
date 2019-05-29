@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 15:22:01 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/28 19:31:26 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/29 17:11:34 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void			set_def_julia_params(t_mlx *mlx)
 	mlx->jul.scale = 0.7;
 	mlx->jul.c_part.x = 0.2;
 	mlx->jul.c_part.y = 0.7;
+	mlx->jul.x_zoom = 1;
+	mlx->jul.y_zoom = 1;
 }
 
 t_complex		map_point(t_point curr, double radius)

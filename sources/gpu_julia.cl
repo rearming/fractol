@@ -125,8 +125,8 @@ __kernel void			julia(__global int *params, __global double *d_params,
 	scale_x = d_params[6];
 	scale_y = d_params[7];
 
-	x = g_id % width - hor_shift;
-	y = g_id / height - vert_shift;
+	x = g_id % width - hor_shift / (scale);
+	y = g_id / height - vert_shift / (scale);
 
 	iters = 0;
 	z0 = map_point((t_point){x, y, 0}, radius, width, height, scale, scale_x, scale_y);
