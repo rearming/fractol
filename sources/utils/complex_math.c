@@ -27,10 +27,10 @@ t_complex		complex_sqr(t_complex a)
 
 	c.x = a.x * a.x - a.y * a.y;
 	c.y = 2 * a.x * a.y;
-	return c;
+	return (c);
 }
 
 double			complex_sqrt(t_complex a)
 {
-	return sqrt(a.x * a.x + a.y * a.y);
+	return (sqrt(a.x * a.x + a.y * a.y));
 }

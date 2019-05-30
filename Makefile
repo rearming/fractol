@@ -6,17 +6,101 @@
 #    By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/10 23:20:41 by sleonard          #+#    #+#              #
-#    Updated: 2019/05/28 14:58:10 by sleonard         ###   ########.fr        #
+#    Updated: 2019/05/30 18:16:41 by sleonard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+# ============================================================================ #
+# HOOKS
+# ============================================================================ #
+
+HOOKS_FILES =					\
+		hooks.c					\
+		hooks_mandelbrot.c		\
+		hooks_julia.c			\
+
+HOOKS_DIR =						\
+	./sources/hooks/
+
+HOOKS_OBJ = $(addprefix $(OBJ_DIR), $(HOOKS_FILES:.c=.o))
+
+# ============================================================================ #
+# OPEN_CL
+# ============================================================================ #
+
+OPEN_CL_FILES =					\
+		opencl_utils.c			\
+		cl_gnl.c				\
+		cl_render.c				\
+
+OPEN_CL_DIR =					\
+	./sources/open_cl/
+
+OPEN_CL_OBJ = $(addprefix $(OBJ_DIR), $(OPEN_CL_FILES:.c=.o))
+
+# ============================================================================ #
+# TERMINAL
+# ============================================================================ #
+
+TERMINAL_FILES =				\
+		terminal.c				\
+		parse_term_input.c		\
+		term_string_utils.c		\
+
+TERMINAL_DIR =					\
+	./sources/terminal/
+
+TERMINAL_OBJ = $(addprefix $(OBJ_DIR), $(TERMINAL_FILES:.c=.o))
+
+# ============================================================================ #
+# UTILS
+# ============================================================================ #
+
+UTILS_FILES =					\
+		error.c					\
+		image.c					\
+		init.c					\
+		complex_math.c			\
+		bresenham.c				\
+
+UTILS_DIR =						\
+	./sources/utils/
+
+UTILS_OBJ = $(addprefix $(OBJ_DIR), $(UTILS_FILES:.c=.o))
+
+# ============================================================================ #
+# MAIN
+# ============================================================================ #
+
+MAIN_FILES =					\
+		fractol.c				\
+		julia.c					\
+		mandelbrot.c			\
+		jumps.c					\
+
+MAIN_DIR =						\
+	./sources/
+
+MAIN_OBJ = $(addprefix $(OBJ_DIR), $(MAIN_FILES:.c=.o))
+
+# ============================================================================ #
+# BUILD FRACTOL
+# ============================================================================ #
 
 NAME =							\
 	fractol
 
+OBJ =							\
+	$(MAIN_OBJ)					\
+	$(UTILS_OBJ)				\
+	$(TERMINAL_OBJ)				\
+	$(OPEN_CL_OBJ)				\
+	$(HOOKS_OBJ)				\
+
 LIBFT =							\
 	./libft/libft.a
 
-FT_PRINTF = 				\
+FT_PRINTF = 					\
 	./libft/ft_printf/
 
 MLX_LIB = 						\
@@ -37,23 +121,6 @@ INCLUDES = 						\
 MLX_INCL =						\
 	/usr/local/include/
 
-FILES =							\
-		error.c					\
-		fractol.c				\
-		image.c					\
-		init.c					\
-		mandelbrot.c			\
-		hooks.c					\
-		jumps.c					\
-		opencl_utils.c			\
-		cl_gnl.c				\
-		hooks_mandelbrot.c		\
-		julia.c					\
-		hooks_julia.c			\
-		complex_math.c			\
-
-OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
-
 COMP = gcc $(COMP_FLAGS) -I $(INCLUDES) -I $(LIBFT_INC) -I $(MLX_INCL)
 
 MLX_FRAMEWORK = -framework OpenGL -framework AppKit
@@ -68,9 +135,21 @@ $(NAME) : $(LIBFT) $(OBJ_DIR) $(OBJ)
 	$(COMP) $(FRACTOL_FLAGS) $(OBJ) -o $(NAME)
 
 $(OBJ_DIR) :
-	@mkdir -p $(OBJ_DIR)
+	mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)%.o : $(SRC_DIR)%.c
+$(OBJ_DIR)%.o : $(MAIN_DIR)%.c
+	$(COMP) -c $< -o $@
+
+$(OBJ_DIR)%.o : $(OPEN_CL_DIR)%.c
+	$(COMP) -c $< -o $@
+
+$(OBJ_DIR)%.o : $(TERMINAL_DIR)%.c
+	$(COMP) -c $< -o $@
+
+$(OBJ_DIR)%.o : $(UTILS_DIR)%.c
+	$(COMP) -c $< -o $@
+
+$(OBJ_DIR)%.o : $(HOOKS_DIR)%.c
 	$(COMP) -c $< -o $@
 
 clean :

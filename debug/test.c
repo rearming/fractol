@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 10:13:33 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/27 14:03:50 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/30 15:45:18 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 int		main(void)
 {
 	//ft_printf("kekes: [%i]\n", 1342);
-	printf("res: [%f]\n", ((double)(50 - 100) / 100) * 255);
+	printf("double: [%Lf]\n", 4252.0L);
 	return (0);
 }

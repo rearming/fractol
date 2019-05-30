@@ -6,26 +6,27 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 17:56:23 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/29 20:50:30 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/30 18:06:50 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-#include <stdio.h>
-#include <math.h>
-#include <mlx.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <OpenCL/opencl.h>
+# include <stdio.h>
+# include <math.h>
+# include <mlx.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <OpenCL/opencl.h>
 
-#include "libft.h"
-#include "structs.h"
-#include "colors.h"
-#include "key_codes.h"
-#include "errors.h"
-#include "defines.h"
+# include "libft.h"
+# include "structs.h"
+# include "colors.h"
+# include "key_codes.h"
+# include "errors.h"
+# include "defines.h"
+
 /*
 **	main
 */
@@ -70,16 +71,36 @@ void		show_usage(void);
 **	hooks utils
 */
 
-int 		cross_hook(void *param);
-int 		key_hook(int key_code, void *param);
+int			cross_hook(void *param);
+int			key_hook(int key_code, void *param);
 int			mouse_move(int x, int y, void *param);
 int			mouse_action(int button_code, int y, int x, void *param);
 
 /*
-**	terminal
+**	terminal parsing
 */
 
 void		parse_term_input(t_mlx *mlx, int key);
+char		get_char(int key);
+
+/*
+**	terminal string utils
+*/
+
+void		clear_command_data(t_mlx *mlx);
+void		update_backup(t_mlx *mlx);
+void		check_backup(t_mlx *mlx, int key);
+void		del_char(t_mlx *mlx);
+
+/*
+**	terminal command processing
+*/
+
+void		command_based_render(t_mlx *mlx);
+void		change_max_iters(t_mlx *mlx);
+void		process_colors(t_mlx *mlx);
+void		process_jump(t_mlx *mlx);
+void		process_command(t_mlx *mlx);
 
 /*
 **	image
@@ -98,7 +119,6 @@ void		bresen_line(t_mlx *mlx, t_point start, t_point end);
 **	complex math
 */
 
-
 t_complex	complex_add(t_complex a, t_complex b);
 t_complex	complex_sqr(t_complex a);
 double		complex_sqrt(t_complex a);
@@ -110,7 +130,7 @@ double		complex_sqrt(t_complex a);
 void		mandelbrot(t_mlx *mlx);
 void		calc_mandelbrot(t_point curr, t_mlx *mlx);
 void		set_def_mand_params(t_mlx *mlx);
-int 		get_color(int iters, t_mlx *mlx);
+int			get_color(int iters, t_mlx *mlx);
 
 /*
 **	hooks mandlelbrot
@@ -132,8 +152,8 @@ void		print_params(t_mlx *mlx);
 **	jumps
 */
 
-void		jump_to_left(t_mlx *mlx);
-void		jump_mandel(t_mlx *mlx);
+void		jump_home(t_mlx *mlx);
+void		jump_deep_self(t_mlx *mlx);
 void		jump_star(t_mlx *mlx);
 void		jump_maelstorm(t_mlx *mlx);
 
@@ -151,7 +171,5 @@ void		julia(t_mlx *mlx);
 void		mouse_change_julia(t_mlx *mlx, t_point pos);
 void		key_change_julia(t_mlx *mlx, int keycode);
 void		mouse_action_julia(t_mlx *mlx, int button_code);
-
-
 
 #endif

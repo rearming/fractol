@@ -6,11 +6,11 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:56:01 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/29 21:16:27 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/30 10:43:58 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef  KEY_CODES_H
+#ifndef KEY_CODES_H
 # define KEY_CODES_H
 
 /*
@@ -82,16 +82,16 @@
 **	COMMAND KEYS
 */
 
-# define TAB 0x30
-# define SPACE 0x31
-# define TILDA 0x32
-# define DEL 0x33
-# define ESC 0x35
-# define CMD 0x37
+# define TAB 48
+# define SPACE 49
+# define TILDA 50
+# define DEL 51
+# define ESC 53
+# define CMD 259
 # define SHIFT 257
-# define CAPS_LOCK 0x39
-# define OPTION 0x3A
-# define CTRL 0x3B
+# define CAPS_LOCK 272
+# define OPTION 261
+# define CTRL 256
 # define ENTER 36
 
 /*

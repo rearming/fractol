@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   terminal.c                                         :+:      :+:    :+:   */
+/*   parse_term_input.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/29 19:48:01 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/29 22:06:37 by sleonard         ###   ########.fr       */
+/*   Created: 2019/05/30 17:57:13 by sleonard          #+#    #+#             */
+/*   Updated: 2019/05/30 18:03:30 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-char 		parse_key1(int key)
+char		parse_key1(int key)
 {
 	if (key == A)
 		return ('a');
@@ -38,15 +38,15 @@ char 		parse_key1(int key)
 		return ('k');
 	if (key == L)
 		return ('l');
-	return (0);
+	return (key == M ? 'm' : 0);
 }
 
-char 		parse_key2(int key)
+char		parse_key2(int key)
 {
-	if (key == M)
-		return ('m');
 	if (key == N)
 		return ('n');
+	if (key == O)
+		return ('o');
 	if (key == P)
 		return ('p');
 	if (key == Q)
@@ -70,7 +70,7 @@ char 		parse_key2(int key)
 	return (key == Z ? 'z' : 0);
 }
 
-char 		parse_key3(int key)
+char		parse_key3(int key)
 {
 	if (key == SPACE)
 		return (' ');
@@ -96,45 +96,47 @@ char 		parse_key3(int key)
 		return ('8');
 	if (key == T_9 || key == NUM_9)
 		return ('9');
-	return (0);
+	return (key == COLON ? ':' : 0);
 }
 
-void		process_command(t_mlx *mlx)
+char		get_char(int key)
 {
-	printf("command: [%s]\n", mlx->term.buff);
-	mlx->term.command = 0;
+	char	c;
+
+	c = parse_key1(key);
+	if (c)
+		return (c);
+	c = parse_key2(key);
+	if (c)
+		return (c);
+	c = parse_key3(key);
+	if (c)
+		return (c);
+	return (0);
 }
 
 void		parse_term_input(t_mlx *mlx, int key)
 {
-	bresen_line(mlx, (t_point){0, WIN_HEIGHT - 300, 0, WHITE}, (t_point){WIN_WIDTH, WIN_HEIGHT - 300, 0, 0});
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
 	if (key == ENTER)
 	{
-		mlx->term.buff[mlx->term.i] = 0;
+		mlx->term.cmd_i = 0;
+		update_backup(mlx);
 		process_command(mlx);
-		mlx->term.i = 0;
-	}
-	if (mlx->term.command == PREPARE)
-	{
-		mlx->term.command = LISTEN;
 		return ;
 	}
-	if (parse_key1(key))
-		mlx->term.buff[mlx->term.i] = parse_key1(key);
-	if (parse_key2(key))
-		mlx->term.buff[mlx->term.i] = parse_key2(key);
-	if (parse_key3(key))
-		mlx->term.buff[mlx->term.i] = parse_key3(key);
-
-	//printf("buf: [%i] : [%c]\n", mlx->term.i, mlx->term.buff[mlx->term.i]);
-	if (key == DEL)
-	{
-		printf("del!\n");
-		mlx->term.buff[mlx->term.i] = 0;
-		mlx->term.i--;
-	}
+	if (mlx->term.cmd.status == PREPARE)
+		mlx->term.cmd.status = LISTEN;
+	bresen_line(mlx, (t_point){0, WIN_HEIGHT - 300, 0, WHITE},
+				(t_point){WIN_WIDTH, WIN_HEIGHT - 300, 0, 0});
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
+	check_backup(mlx, key);
+	mlx->term.buff[mlx->term.i] = get_char(key);
+	if (mlx->term.i == 0)
+		mlx->term.buff[++mlx->term.i] = ' ';
+	if (key == DEL && mlx->term.i >= 3)
+		del_char(mlx);
 	if (mlx->term.buff[mlx->term.i])
 		mlx->term.i++;
-	mlx_string_put(mlx->mlx, mlx->win, 20, WIN_HEIGHT - 200, WHITE, mlx->term.buff);
+	mlx_string_put(mlx->mlx, mlx->win, 50, WIN_HEIGHT - 200, WHITE,
+				mlx->term.buff);
 }

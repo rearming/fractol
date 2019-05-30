@@ -18,22 +18,31 @@ set(ft_printf_includes
         libft/ft_printf/includes)
 
 set(Sources
-        sources/error.c
-        sources/fractol.c
-        sources/image.c
-        sources/init.c
-        sources/mandelbrot.c
-        sources/hooks.c
         debug/print_params.c
+
+        sources/hooks/hooks.c
+        sources/hooks/hooks_julia.c
+        sources/hooks/hooks_mandelbrot.c
+
+        sources/open_cl/opencl_utils.c
+        sources/open_cl/cl_gnl.c
+        sources/open_cl/cl_render.c
+
+        sources/terminal/terminal.c
+        sources/terminal/parse_term_input.c
+        sources/terminal/term_string_utils.c
+
+        sources/utils/error.c
+        sources/utils/image.c
+        sources/utils/init.c
+        sources/utils/complex_math.c
+        sources/utils/bresenham.c
+
+        sources/mandelbrot.c
+        sources/fractol.c
         sources/jumps.c
-        sources/opencl_utils.c
-        sources/cl_gnl.c
-        sources/hooks_mandelbrot.c
         sources/julia.c
-        sources/hooks_julia.c
-        sources/complex_math.c
-        sources/terminal.c
-        sources/bresenham.c)
+        )
 
 set(mlx_includes
         /usr/local/include/)

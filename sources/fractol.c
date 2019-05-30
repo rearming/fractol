@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 17:56:11 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/29 21:53:55 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/30 13:33:00 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 void		render_fractal(t_mlx *mlx, char *name)
 {
-	if (ft_strstr(name, "mandelbrot"))
+	clear_image(mlx);
+	if (mlx->term.cmd.frac_type == MANDELBROT || ft_strstr(name, "mandelbrot"))
 	{
 		set_def_mand_params(mlx);
 		mlx->cl = cl_init(mlx);
 		mandelbrot_render(mlx);
 	}
-	if (ft_strstr(name, "julia"))
+	if (mlx->term.cmd.frac_type == JULIA || ft_strstr(name, "julia"))
 	{
 		set_def_julia_params(mlx);
 		mlx->cl = cl_init(mlx);
@@ -28,7 +29,7 @@ void		render_fractal(t_mlx *mlx, char *name)
 	}
 }
 
-int 		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_mlx		*mlx;
 

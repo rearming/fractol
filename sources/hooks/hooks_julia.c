@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 16:44:12 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/29 19:37:40 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/30 15:16:09 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void		zoom_julia(t_mlx *mlx, int mode, int source)
 		mlx->jul.scale -= mlx->jul.scale * 0.05;
 		if (source == MOUSE)
 		{
-			mlx->jul.hor_shift -= (int) (mlx->jul.scale * mlx->jul.x_zoom * 40);
-			mlx->jul.vert_shift -= (int) (mlx->jul.scale * mlx->jul.y_zoom * 80);
+			mlx->jul.hor_shift -= (int)(mlx->jul.scale * mlx->jul.x_zoom * 40);
+			mlx->jul.vert_shift -= (int)(mlx->jul.scale * mlx->jul.y_zoom * 80);
 		}
 	}
 	if (mode == OUT)
@@ -31,12 +31,14 @@ void		mouse_change_julia(t_mlx *mlx, t_point pos)
 {
 	if (!mlx->jul.is_frozen)
 	{
-		mlx->jul.c_part.x = (double) pos.x / WIN_WIDTH;
-		mlx->jul.c_part.y = (double) pos.y / WIN_HEIGHT;
+		mlx->jul.c_part.x = (double)pos.x / WIN_WIDTH;
+		mlx->jul.c_part.y = (double)pos.y / WIN_HEIGHT;
 		julia_render(mlx);
 	}
-	pos.x = pos.x >= WIN_WIDTH / 2 ? pos.x - (WIN_WIDTH - pos.x) : -WIN_WIDTH + pos.x;
-	pos.y = pos.y >= WIN_HEIGHT / 2 ? pos.y - (WIN_HEIGHT - pos.y) : -WIN_HEIGHT + pos.y;
+	pos.x = pos.x >= WIN_WIDTH / 2 ?
+			pos.x - (WIN_WIDTH - pos.x) : -WIN_WIDTH + pos.x;
+	pos.y = pos.y >= WIN_HEIGHT / 2 ?
+			pos.y - (WIN_HEIGHT - pos.y) : -WIN_HEIGHT + pos.y;
 	mlx->jul.x_zoom = (pos.x / ((double)WIN_WIDTH / 2));
 	mlx->jul.y_zoom = (pos.y / ((double)WIN_HEIGHT / 2));
 }
@@ -66,7 +68,6 @@ void		key_change_julia(t_mlx *mlx, int key_code)
 		set_def_julia_params(mlx);
 	if (key_code == NUM_PLUS || key_code == NUM_MINUS)
 		zoom_julia(mlx, key_code == NUM_PLUS ? IN : OUT, 0);
-
 	if (key_code == ARR_UP)
 		mlx->jul.vert_shift += (int)round((mlx->jul.scale * 60));
 	if (key_code == ARR_DOWN)

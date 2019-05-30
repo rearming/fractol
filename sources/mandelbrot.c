@@ -6,37 +6,35 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 14:48:09 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/29 19:40:26 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/30 15:17:35 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "structs.h"
 
-#include <colors.h>
-
-
 void			set_def_mand_params(t_mlx *mlx)
 {
 	mlx->frac_type = MANDELBROT;
-
 	mlx->rand[0] = 4;
 	mlx->rand[1] = 8;
 	mlx->rand[2] = 16;
-
+	mlx->rand[3] = 48;
+	mlx->rand[4] = 9;
+	mlx->rand[5] = 16;
 	mlx->rend_device = GPU_RENDER;
 	mlx->mp.scale_x = (double)WIN_WIDTH / WIN_HEIGHT;
 	mlx->mp.scale_y = (double)WIN_HEIGHT / WIN_WIDTH;
 	mlx->mp.max_iters = 200;
 	mlx->mp.hor_shift = -2.15;
-	mlx->mp.vert_shift = -1.15;
+	mlx->mp.vert_shift = -0.95;
 	mlx->mp.xside = 2.0 * mlx->mp.scale_x;
 	mlx->mp.yside = 2.0 * mlx->mp.scale_y;
 	mlx->mp.xscale = mlx->mp.xside / WIN_WIDTH;
 	mlx->mp.yscale = mlx->mp.yside / WIN_HEIGHT;
 }
 
-int 			get_color(int iters, t_mlx *mlx)
+int				get_color(int iters, t_mlx *mlx)
 {
 	int red;
 	int green;
@@ -44,19 +42,19 @@ int 			get_color(int iters, t_mlx *mlx)
 
 	if (iters == mlx->mp.max_iters)
 		return (BLACK);
-	red = iters % mlx->rand[0] * 24;
-	green = iters % mlx->rand[1] * 32;
-	blue = iters % mlx->rand[2] * 16;
+	red = iters % mlx->rand[0] * mlx->rand[3];
+	green = iters % mlx->rand[1] * mlx->rand[4];
+	blue = iters % mlx->rand[2] * mlx->rand[5];
 	return (red << 16 | green << 8 | blue);
 }
 
 void			calc_mandelbrot(t_point curr, t_mlx *mlx)
 {
-	double			temp;
 	t_complex		z;
 	t_complex		c;
-	int 			iters;
 	t_point			res;
+	double			temp;
+	int				iters;
 
 	res = (t_point){curr.x, curr.y, 0, 0};
 	c.x = curr.x * mlx->mp.xscale + mlx->mp.hor_shift;

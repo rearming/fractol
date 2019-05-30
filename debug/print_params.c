@@ -28,6 +28,9 @@ void		print_mandel_params(t_mlx *mlx)
 	printf("red: [%i]\n", mlx->rand[0]);
 	printf("green: [%i]\n", mlx->rand[1]);
 	printf("blue: [%i]\n", mlx->rand[2]);
+	printf("red coeff: [%i]\n", mlx->rand[3]);
+	printf("green coeff: [%i]\n", mlx->rand[4]);
+	printf("blue coeff: [%i]\n", mlx->rand[5]);
 	printf("\t\nMAX ITERS:\n");
 	printf("[%i]\n", mlx->mp.max_iters);
 }

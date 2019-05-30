@@ -40,9 +40,9 @@ int 				get_color(int iters, int max_iters, __global int *rand_params)
 
 	if (iters == max_iters)
 		return (0x000000);
-	red = iters % rand_params[0] * 32;
-	green = iters % rand_params[1] * 32;
-	blue = iters % rand_params[2] * 16;
+	red = iters % rand_params[0] * rand_params[3];
+	green = iters % rand_params[1] * rand_params[4];
+	blue = iters % rand_params[2] * rand_params[5];
 
 	return (red << 16 | green << 8 | blue);
 }
