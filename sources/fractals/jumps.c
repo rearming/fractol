@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 11:24:15 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/30 14:51:14 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/31 12:08:01 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void		jump_home(t_mlx *mlx)
 void		jump_deep_self(t_mlx *mlx)
 {
 	mlx->frac_type = MANDELBROT;
-	mlx->mp.max_iters = 500;
+	mlx->mp.max_iters = 1000;
 	mlx->mp.hor_shift = -1.7433419064;
 	mlx->mp.vert_shift = 0.0000907670;
 	mlx->mp.xside = 0.00000000374 * mlx->mp.scale_x;

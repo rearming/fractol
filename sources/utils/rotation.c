@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.h                                           :+:      :+:    :+:   */
+/*   rotation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 12:56:35 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/31 17:04:32 by sleonard         ###   ########.fr       */
+/*   Created: 2019/04/30 19:59:08 by sleonard          #+#    #+#             */
+/*   Updated: 2019/05/31 14:25:51 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLORS_H
-# define COLORS_H
+#include "fractol.h"
 
-# define WHITE 0xFFFFFF
-# define BLACK 0x000000
-# define RED 0xFF0000
-# define V_RED 0xCB1A43
-# define GREEN 0x00FF00
-# define BLUE 0x0000FF
-# define YELLOW 0xFFFF00
-# define PURPLE 0x79125D
-# define LIGHT_BLUE 0x2199F5
-# define LIGHT_GREEN 0x55CD55
-# define ROMA_COLOR 0xFC21EB
+void		rotate_z(t_point *point, t_point center, double angle)
+{
+	t_point		temp;
 
-#endif
+	temp = *point;
+	point->x = center.x + (point->x - center.x)
+			* cos(angle) - (point->y - center.y) * sin(angle);
+	point->y = center.y + (temp.y - center.y)
+			* cos(angle) + (temp.x - center.x) * sin(angle);
+}

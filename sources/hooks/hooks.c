@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 17:10:27 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/30 15:54:24 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/31 16:52:34 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@ int			is_action_key(int keycode)
 	if (keycode == ARR_UP || keycode == ARR_LEFT
 	|| keycode == ARR_RIGHT || keycode == ARR_DOWN
 	|| keycode == NUM_PLUS || keycode == NUM_MINUS
-	|| keycode == NUM_LEFT || keycode == NUM_RIGHT
-	|| keycode == NUM_UP || keycode == NUM_DOWN
 	|| keycode == J || keycode == R || keycode == N
 	|| keycode == C || keycode == G || keycode == SPACE
-	|| keycode == ENTER)
+	|| keycode == ENTER || keycode == S)
 		return (1);
 	return (0);
 }
@@ -85,5 +83,7 @@ int			key_hook(int key_code, void *param)
 		key_change_mandelbrot(mlx, key_code);
 	if (mlx->frac_type == JULIA && is_action_key(key_code))
 		key_change_julia(mlx, key_code);
+	if (mlx->frac_type == TRIA && is_action_key(key_code))
+		key_change_tria(mlx, key_code);
 	return (0);
 }

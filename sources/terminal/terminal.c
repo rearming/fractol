@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:48:01 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/30 18:28:15 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/31 19:58:40 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void		command_based_render(t_mlx *mlx)
 		}
 		if (mlx->frac_type == JULIA)
 			key_change_julia(mlx, 0);
+		if (mlx->frac_type == TRIA)
+			key_change_tria(mlx, 0);
 	}
 }
 
@@ -51,6 +53,9 @@ void		change_max_iters(t_mlx *mlx)
 			mlx->mp.max_iters = ft_atoi(p_str + 6);
 		if (mlx->term.cmd.frac_type == JULIA)
 			mlx->jul.max_iters = ft_atoi(p_str + 6);
+		if (mlx->term.cmd.frac_type == TRIA)
+			mlx->tria.r_calls = ft_atoi(p_str + 6) < 15 ?
+					ft_atoi(p_str + 6) : 3;
 	}
 }
 
@@ -104,7 +109,6 @@ void		process_command(t_mlx *mlx)
 	char	*buff;
 
 	buff = mlx->term.buff;
-	ft_printf("command: [%s]\n", buff);
 	mlx->term.cmd.frac_type = mlx->frac_type;
 	if (ft_strstr(buff, " render "))
 		mlx->term.cmd.action = RENDER;
@@ -118,10 +122,13 @@ void		process_command(t_mlx *mlx)
 	if (ft_strstr(buff, " julia") && mlx->term.cmd.action != SET)
 		mlx->term.cmd.frac_type = JULIA;
 	if ((ft_strstr(buff, " mandelbrot") || ft_strstr(buff, " mandel"))
-											&& mlx->term.cmd.action != SET)
+		&& mlx->term.cmd.action != SET)
 		mlx->term.cmd.frac_type = MANDELBROT;
+	if (ft_strstr(buff, " tria") && mlx->term.cmd.action != SET)
+		mlx->term.cmd.frac_type = TRIA;
 	if (mlx->term.cmd.action == SET)
 		change_max_iters(mlx);
+	ft_strstr(buff, "help") ? terminal_info(mlx) : 0;
 	command_based_render(mlx);
 	clear_command_data(mlx);
 }

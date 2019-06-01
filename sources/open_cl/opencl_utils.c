@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 17:10:01 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/30 18:14:50 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/06/01 20:55:02 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,32 +45,60 @@ char		*get_cl_file(t_mlx *mlx, size_t *size)
 	return (cl_file);
 }
 
-t_cl		cl_init(t_mlx *mlx)
+/*void		cl_new_program(t_mlx *mlx)
 {
-	t_cl		cl;
 	int			ret;
 	char		*cl_file;
 	size_t		size;
 
-	if ((ret = clGetPlatformIDs(1, &cl.platform_id, &cl.ret_num_platforms)))
-		raise_error(ERR_OPENCL);
-	if ((ret = clGetDeviceIDs(cl.platform_id, CL_DEVICE_TYPE_GPU, 1,
-			&cl.device_id, &cl.ret_num_devices)))
-		raise_error(ERR_OPENCL);
-	cl.context = clCreateContext(NULL, 1, &cl.device_id, NULL, NULL, &ret);
-	cl.queue = clCreateCommandQueue(cl.context, cl.device_id, 0, &ret);
 	cl_file = get_cl_file(mlx, &size);
-	cl.program = clCreateProgramWithSource(cl.context, 1,
-			(const char **)&cl_file, &size, &ret);
-	if ((ret = clBuildProgram(cl.program, 1, &cl.device_id, NULL, NULL, NULL)))
+	mlx->cl.program = clCreateProgramWithSource(mlx->cl.context, 1,
+										   (const char **)&cl_file, &size, &ret);
+	if ((ret = clBuildProgram(mlx->cl.program, 1, &mlx->cl.device_id, NULL, NULL, NULL)))
 		raise_error(ERR_OPENCL);
 	if (mlx->frac_type == MANDELBROT)
-		cl.kernel = clCreateKernel(cl.program, "mandelbrot", &ret);
+		mlx->cl.kernel = clCreateKernel(mlx->cl.program, "mandelbrot", &ret);
 	if (mlx->frac_type == JULIA)
-		cl.kernel = clCreateKernel(cl.program, "julia", &ret);
-	cl_set_kernel(&cl);
+		mlx->cl.kernel = clCreateKernel(mlx->cl.program, "julia", &ret);
+	if (ret)
+		raise_error(ERR_OPENCL);
+	cl_set_kernel(&mlx->cl);
 	free(cl_file);
-	return (cl);
+}*/
+
+void		cl_init(t_mlx *mlx)
+{
+	int			ret;
+	char		*cl_file;
+	size_t		size;
+
+	if ((ret = clGetPlatformIDs(1, &mlx->cl.platform_id, &mlx->cl.ret_num_platforms)))
+		raise_error(ERR_OPENCL);
+	if ((ret = clGetDeviceIDs(mlx->cl.platform_id, CL_DEVICE_TYPE_GPU, 1,
+			&mlx->cl.device_id, &mlx->cl.ret_num_devices)))
+		raise_error(ERR_OPENCL);
+	mlx->cl.context = clCreateContext(NULL, 1, &mlx->cl.device_id, NULL, NULL, &ret);
+	mlx->cl.queue = clCreateCommandQueue(mlx->cl.context, mlx->cl.device_id, 0, &ret);
+	cl_file = get_cl_file(mlx, &size);
+	mlx->cl.program = clCreateProgramWithSource(mlx->cl.context, 1,
+												(const char **)&cl_file, &size, &ret);
+	if ((ret = clBuildProgram(mlx->cl.program, 1, &mlx->cl.device_id, NULL, NULL, NULL)))
+		raise_error(ERR_OPENCL);
+	if (mlx->frac_type == MANDELBROT)
+	{
+		if (mlx->cl.kernel) //todo cleanup
+		{
+			printf("hello?\n");
+			ret = clReleaseKernel(mlx->cl.kernel);
+		}
+		mlx->cl.kernel = clCreateKernel(mlx->cl.program, "mandelbrot", &ret);
+	}
+	if (mlx->frac_type == JULIA)
+		mlx->cl.kernel = clCreateKernel(mlx->cl.program, "julia", &ret);
+	if (ret)
+		raise_error(ERR_OPENCL);
+	cl_set_kernel(&mlx->cl);
+	free(cl_file);
 }
 
 void		cl_run_kernels(t_mlx *mlx)
@@ -78,10 +106,10 @@ void		cl_run_kernels(t_mlx *mlx)
 	size_t	kern_num;
 	int		ret;
 
-	printf("wtf??\n");
 	kern_num = WIN_HEIGHT * WIN_WIDTH;
 	ret = clEnqueueNDRangeKernel(mlx->cl.queue, mlx->cl.kernel, 1,
 			NULL, &kern_num, NULL, 0, NULL, NULL);
 	if (ret)
 		raise_error(ERR_OPENCL);
+
 }

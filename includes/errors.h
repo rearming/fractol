@@ -23,5 +23,6 @@
 # define ERR_MLX_IMG_DATA 45
 # define ERR_USAGE 46
 # define ERR_OPENCL 47
+# define ERR_OPENCL_CLEAN 48
 
 #endif

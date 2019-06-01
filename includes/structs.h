@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/30 18:10:39 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/31 17:31:47 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,14 @@ typedef struct			s_jul
 	double				y_zoom;
 }						t_jul;
 
+typedef struct			s_tria
+{
+	int					side;
+	int					r_calls;
+	int					color;
+	t_point				pos_top;
+}						t_tria;
+
 typedef struct			s_command
 {
 	int					status;
@@ -119,6 +127,7 @@ typedef struct			s_mlx
 	int					rand[6];
 	t_mp				mp;
 	t_jul				jul;
+	t_tria				tria;
 	t_cl				cl;
 	t_erm				term;
 	int					rend_device;

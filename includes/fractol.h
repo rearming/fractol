@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 17:56:23 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/30 18:06:50 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/06/01 20:05:20 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ t_mlx		*ft_mlx_init(void);
 **	Open CL init
 */
 
-t_cl		cl_init(t_mlx *mlx);
+void		cl_init(t_mlx *mlx);
 char		*cl_gnl(int fd);
+void		cl_new_program(t_mlx *mlx);
 
 /*
 **	Open CL utils
@@ -59,6 +60,12 @@ void		cl_run_kernels(t_mlx *mlx);
 
 void		mandelbrot_render(t_mlx *mlx);
 void		julia_render(t_mlx *mlx);
+
+/*
+**	Open CL clean
+*/
+
+void		clean_opencl(t_mlx *mlx);
 
 /*
 **	error
@@ -171,5 +178,32 @@ void		julia(t_mlx *mlx);
 void		mouse_change_julia(t_mlx *mlx, t_point pos);
 void		key_change_julia(t_mlx *mlx, int keycode);
 void		mouse_action_julia(t_mlx *mlx, int button_code);
+
+/*
+**	triangle
+*/
+
+void		set_def_triangle_params(t_mlx *mlx);
+void		triangle(t_mlx *mlx);
+void		r_triangle(t_mlx *mlx, t_point top, int len, int r_calls);
+
+/*
+**	hooks triangle
+*/
+
+void		key_change_tria(t_mlx *mlx, int key_code);
+
+/*
+**	rotation
+*/
+
+void		rotate_z(t_point *point, t_point center, double angle);
+
+/*
+**	screen info
+*/
+
+void		screen_info(t_mlx *mlx);
+void		terminal_info(t_mlx *mlx);
 
 #endif

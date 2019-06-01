@@ -6,7 +6,7 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 15:58:41 by sselusa           #+#    #+#             */
-/*   Updated: 2019/05/24 15:23:46 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/06/01 19:27:03 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -450,7 +450,6 @@ int					is_even(int num);
 */
 void				ft_swap(int *a, int *b);
 
-
 /*
 **	Same as ft_strjoin, but takes as parameter size of resulting string
 **	(for optimisation purposes, instead of two ft_strlen calls).
@@ -470,6 +469,6 @@ size_t				ft_strlen_char(char *str, char breaker);
 /*
 **	Same usage as standard library printf.
 */
-int			ft_printf(const char *format, ...);
+int					ft_printf(const char *format, ...);
 
 #endif

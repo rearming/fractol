@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 14:48:09 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/30 15:17:35 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/31 17:00:50 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 void			set_def_mand_params(t_mlx *mlx)
 {
-	mlx->frac_type = MANDELBROT;
 	mlx->rand[0] = 4;
 	mlx->rand[1] = 8;
 	mlx->rand[2] = 16;
 	mlx->rand[3] = 48;
 	mlx->rand[4] = 9;
 	mlx->rand[5] = 16;
+	mlx->frac_type = MANDELBROT;
 	mlx->rend_device = GPU_RENDER;
 	mlx->mp.scale_x = (double)WIN_WIDTH / WIN_HEIGHT;
 	mlx->mp.scale_y = (double)WIN_HEIGHT / WIN_WIDTH;

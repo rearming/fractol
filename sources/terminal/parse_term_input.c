@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:57:13 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/30 18:03:30 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/31 17:57:35 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,10 +126,10 @@ void		parse_term_input(t_mlx *mlx, int key)
 	}
 	if (mlx->term.cmd.status == PREPARE)
 		mlx->term.cmd.status = LISTEN;
+	check_backup(mlx, key);
 	bresen_line(mlx, (t_point){0, WIN_HEIGHT - 300, 0, WHITE},
 				(t_point){WIN_WIDTH, WIN_HEIGHT - 300, 0, 0});
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
-	check_backup(mlx, key);
 	mlx->term.buff[mlx->term.i] = get_char(key);
 	if (mlx->term.i == 0)
 		mlx->term.buff[++mlx->term.i] = ' ';
@@ -139,4 +139,5 @@ void		parse_term_input(t_mlx *mlx, int key)
 		mlx->term.i++;
 	mlx_string_put(mlx->mlx, mlx->win, 50, WIN_HEIGHT - 200, WHITE,
 				mlx->term.buff);
+	screen_info(mlx);
 }

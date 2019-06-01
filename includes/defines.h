@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:24:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/30 18:05:08 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/31 12:08:02 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 # define MANDELBROT 1001
 # define JULIA 1002
 # define TREE 1003
+# define TRIA 1004
 
 /*
 **	terminal commands
@@ -51,6 +52,7 @@
 # define RENDER 1010
 # define SET 1012
 # define JUMP 1013
+# define HELP 1014
 
 /*
 **	jump areas

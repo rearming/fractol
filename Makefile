@@ -6,9 +6,21 @@
 #    By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/10 23:20:41 by sleonard          #+#    #+#              #
-#    Updated: 2019/05/30 18:16:41 by sleonard         ###   ########.fr        #
+#    Updated: 2019/05/31 17:12:53 by sleonard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+# ============================================================================ #
+# MAIN
+# ============================================================================ #
+
+MAIN_FILES =					\
+		fractol.c				\
+
+MAIN_DIR =						\
+	$(SRC_DIR)
+
+MAIN_OBJ = $(addprefix $(OBJ_DIR), $(MAIN_FILES:.c=.o))
 
 # ============================================================================ #
 # HOOKS
@@ -18,9 +30,10 @@ HOOKS_FILES =					\
 		hooks.c					\
 		hooks_mandelbrot.c		\
 		hooks_julia.c			\
+		hooks_triangle.c		\
 
 HOOKS_DIR =						\
-	./sources/hooks/
+	$(SRC_DIR)hooks/
 
 HOOKS_OBJ = $(addprefix $(OBJ_DIR), $(HOOKS_FILES:.c=.o))
 
@@ -34,7 +47,7 @@ OPEN_CL_FILES =					\
 		cl_render.c				\
 
 OPEN_CL_DIR =					\
-	./sources/open_cl/
+	$(SRC_DIR)open_cl/
 
 OPEN_CL_OBJ = $(addprefix $(OBJ_DIR), $(OPEN_CL_FILES:.c=.o))
 
@@ -48,7 +61,7 @@ TERMINAL_FILES =				\
 		term_string_utils.c		\
 
 TERMINAL_DIR =					\
-	./sources/terminal/
+	$(SRC_DIR)terminal/
 
 TERMINAL_OBJ = $(addprefix $(OBJ_DIR), $(TERMINAL_FILES:.c=.o))
 
@@ -62,26 +75,30 @@ UTILS_FILES =					\
 		init.c					\
 		complex_math.c			\
 		bresenham.c				\
+		rotation.c				\
+		screen_info.c			\
 
 UTILS_DIR =						\
-	./sources/utils/
+	$(SRC_DIR)utils/
 
 UTILS_OBJ = $(addprefix $(OBJ_DIR), $(UTILS_FILES:.c=.o))
 
+
+
 # ============================================================================ #
-# MAIN
+# FRACTALS
 # ============================================================================ #
 
-MAIN_FILES =					\
-		fractol.c				\
+FRACTALS_FILES =				\
 		julia.c					\
 		mandelbrot.c			\
 		jumps.c					\
+		triangle.c				\
 
-MAIN_DIR =						\
-	./sources/
+FRACTALS_DIR =					\
+	$(SRC_DIR)fractals/
 
-MAIN_OBJ = $(addprefix $(OBJ_DIR), $(MAIN_FILES:.c=.o))
+FRACTALS_OBJ = $(addprefix $(OBJ_DIR), $(FRACTALS_FILES:.c=.o))
 
 # ============================================================================ #
 # BUILD FRACTOL
@@ -96,6 +113,7 @@ OBJ =							\
 	$(TERMINAL_OBJ)				\
 	$(OPEN_CL_OBJ)				\
 	$(HOOKS_OBJ)				\
+	$(FRACTALS_OBJ)				\
 
 LIBFT =							\
 	./libft/libft.a
@@ -150,6 +168,9 @@ $(OBJ_DIR)%.o : $(UTILS_DIR)%.c
 	$(COMP) -c $< -o $@
 
 $(OBJ_DIR)%.o : $(HOOKS_DIR)%.c
+	$(COMP) -c $< -o $@
+
+$(OBJ_DIR)%.o : $(FRACTALS_DIR)%.c
 	$(COMP) -c $< -o $@
 
 clean :
