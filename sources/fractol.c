@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 17:56:11 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/01 20:39:12 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/06/02 12:15:51 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ int			main(int argc, char **argv)
 		raise_error(ERR_USAGE);
 	mlx = ft_mlx_init();
 	render_fractal(mlx, argv[1]);
-	mlx_hook(mlx->win, 2, 0, &key_hook, mlx);
-	mlx_hook(mlx->win, 6, 0, &mouse_move, mlx);
-	mlx_hook(mlx->win, 4, 0, &mouse_action, mlx);
-	mlx_hook(mlx->win, 17, 0, &cross_hook, mlx);
+	mlx_hook(mlx->win, 2, 1, &key_hook, mlx);
+	mlx_hook(mlx->win, 4, 4, &mouse_action, mlx);
+	mlx_hook(mlx->win, 17, 1, &cross_hook, mlx);
+	mlx_hook(mlx->win, 6, (1L << 6), &mouse_move, mlx);
 	mlx_loop(mlx->mlx);
 	return (0);
 }

@@ -7,8 +7,7 @@ set(Includes
         includes/colors.h
         includes/errors.h
         includes/fractol.h
-        includes/key_codes.h
-        includes/structs.h
+		includes/structs.h
         )
 
 set(libft_includes
@@ -46,10 +45,15 @@ set(Sources
 
         sources/fractals/jumps.c
         sources/fractals/julia.c
-        sources/fractals/triangle.c sources/hooks/hooks_triangle.c sources/utils/screen_info.c)
+        sources/fractals/triangle.c
+		sources/hooks/hooks_triangle.c
+		sources/utils/screen_info.c)
 
 set(mlx_includes
-        /usr/local/include/)
+        /usr/local/include/
+		/usr/local/cuda-10.1/targets/x86_64-linux/include/
+		/usr/include/X11/
+		)
 
 include_directories(includes
 
@@ -62,7 +66,10 @@ include_directories(includes
 link_directories(
         ./libft/
         ./libft/ft_printf/
-        /usr/local/lib/)
+        /usr/local/lib/
+		/usr/lib/X11
+		/usr/X11/lib
+		/home/rearming/21utils/mlx_repo/minilibx/)
 
 add_executable(fractol
 
@@ -71,10 +78,15 @@ add_executable(fractol
 
 target_link_libraries(fractol
 
-        "ft"
+		"m"
         "ftprintf"
-        "mlx"
-        "-framework OpenGL"
-        "-framework AppKit"
-        "-framework OpenCL"
+		"ft"
+		"OpenCL"
+		"mlx_Linux"
+		"Xext"
+		"X11"
+        #"mlx"
+       # "-framework OpenGL"
+       # "-framework AppKit"
+       # "-framework OpenCL"
         )
