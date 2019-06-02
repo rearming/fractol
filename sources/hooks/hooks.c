@@ -26,7 +26,10 @@ int			is_action_key(int keycode)
 
 int			cross_hook(void *param)
 {
-	(void)param;
+	t_mlx	*mlx;
+
+	mlx = (t_mlx*)param;
+	clean_opencl(mlx);
 	exit(0);
 	return (0);
 }
@@ -67,7 +70,10 @@ int			key_hook(int key_code, void *param)
 
 	mlx = (t_mlx*)param;
 	if (key_code == ESC)
+	{
+		clean_opencl(mlx);
 		exit(0);
+	}
 	if (key_code == SHIFT)
 	{
 		mlx->term.cmd.status = PREPARE;

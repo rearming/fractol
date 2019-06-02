@@ -124,6 +124,7 @@ typedef struct			s_mlx
 	void				*win;
 	t_image				*img;
 	int					frac_type;
+	int 				is_burn;
 	int					rand[6];
 	t_mp				mp;
 	t_jul				jul;

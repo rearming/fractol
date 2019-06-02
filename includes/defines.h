@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:24:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/02 12:40:14 by rearming         ###   ########.fr       */
+/*   Updated: 2019/06/02 15:55:02 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 # define JULIA 1002
 # define TREE 1003
 # define TRIA 1004
+# define BURNING 1005
 
 /*
 **	terminal commands

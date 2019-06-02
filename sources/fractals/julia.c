@@ -31,10 +31,8 @@ void			set_def_julia_params(t_mlx *mlx)
 	mlx->jul.hor_shift = 1;
 	mlx->jul.vert_shift = 800;
 	mlx->jul.scale = 0.7;
-	//mlx->jul.c_part.x = 0.3690196078;
-	//mlx->jul.c_part.y = 0.3169230769;
-	mlx->jul.c_part.x = 0.2035;
-	mlx->jul.c_part.y = 0.318;
+	mlx->jul.c_part.x = 0.3690196078;
+	mlx->jul.c_part.y = 0.3169230769;
 	mlx->jul.x_zoom = 1;
 	mlx->jul.y_zoom = 1;
 }

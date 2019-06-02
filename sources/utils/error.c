@@ -36,6 +36,7 @@ void		show_usage(void)
 	ft_printf("\t\t ./fractol mandelbrot\n");
 	ft_printf("\t\t ./fractol julia\n");
 	ft_printf("\t\t ./fractol triangle\n");
+	ft_printf("\t\t ./fractol burningship\n");
 	ft_printf("\n");
 	ft_printf("Type 'shift + :' to open fractol's terminal.\n");
 	ft_printf("\tType 'help' in fractol's terminal"

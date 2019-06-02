@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 18:12:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/02 11:43:29 by rearming         ###   ########.fr       */
+/*   Updated: 2019/06/02 16:33:59 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void		cl_fill_julia_buffer(t_mlx *mlx)
 	d_params[5] = mlx->jul.scale;
 	d_params[6] = mlx->jul.scale_x;
 	d_params[7] = mlx->jul.scale_y;
-
 	clEnqueueWriteBuffer(mlx->cl.queue, mlx->cl.params, CL_TRUE, 0,
 						sizeof(int) * 10, &params, 0, NULL, NULL);
 	clEnqueueWriteBuffer(mlx->cl.queue, mlx->cl.double_params, CL_TRUE, 0,
@@ -44,8 +43,10 @@ void		cl_fill_mandelbrot_buffer(t_mlx *mlx)
 	params[0] = WIN_HEIGHT;
 	params[1] = WIN_WIDTH;
 	params[2] = mlx->mp.max_iters;
-
-	//printf("cl->queue: [%p]\n", mlx->cl.queue); //todo fix segfault after cleanup
+	if (mlx->is_burn)
+		params[3] = 1;
+	else
+		params[3] = 0;
 	clEnqueueWriteBuffer(mlx->cl.queue, mlx->cl.params, CL_TRUE, 0,
 						sizeof(int) * 10, &params, 0, NULL, NULL);
 	clEnqueueWriteBuffer(mlx->cl.queue, mlx->cl.double_params, CL_TRUE, 0,

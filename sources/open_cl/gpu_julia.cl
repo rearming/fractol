@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma OPENCL EXTENSION cl_khr_byte_addressable_store : enable
+#pragma OPENCL EXTENSION cl_khr_fp64 : enable
+
 typedef struct	s_complex
 {
 	double 		x;
@@ -47,11 +50,6 @@ int 				get_color(int iters, int max_iters, __global int *rand_params)
 	return (red << 16 | green << 8 | blue);
 }
 
-double			complex_mod(double x, double y)
-{
-	return sqrt(x * x + y * y);
-}
-
 t_complex		complex_add(t_complex a, t_complex b)
 {
 	t_complex c;
@@ -59,6 +57,11 @@ t_complex		complex_add(t_complex a, t_complex b)
 	c.x = a.x + b.x;
 	c.y = a.y + b.y;
 	return (c);
+}
+
+double				d_abs(double n)
+{
+	return (n < 0 ? n * -1 : n);
 }
 
 t_complex		complex_sqr(t_complex a)
@@ -70,18 +73,13 @@ t_complex		complex_sqr(t_complex a)
 	return c;
 }
 
-double			complex_sqrt(t_complex a)
-{
-	return sqrt(a.x * a.x + a.y * a.y);
-}
-
 t_complex		map_point(t_point curr, double radius, int width, int height,
 							double scale, double scale_x, double scale_y)
 {
 	t_complex		c;
 
 	c.x = radius * (curr.x - width / 2.0) / width;
-	c.y = radius * (curr.y - height / 2.0) / height;
+	c.y =  radius * (curr.y - height / 2.0) / height;
 	c.x *= scale_x * scale;
 	c.y *= scale_y * scale;
 	return (c);

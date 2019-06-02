@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 19:53:36 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/02 14:03:14 by rearming         ###   ########.fr       */
+/*   Updated: 2019/06/02 16:51:53 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void 		clean_opencl(t_mlx *mlx)
 		ret += clFinish(mlx->cl.queue);
 		ret += clReleaseCommandQueue(mlx->cl.queue);
 	}
+	if (mlx->cl.device_id)
+		clReleaseDevice(mlx->cl.device_id);
 	if (mlx->cl.kernel)
 		ret += clReleaseKernel(mlx->cl.kernel);
 	if (mlx->cl.program)

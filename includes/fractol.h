@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 17:56:23 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/02 12:28:29 by rearming         ###   ########.fr       */
+/*   Updated: 2019/06/02 12:32:27 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,11 @@ void		change_max_iters(t_mlx *mlx);
 void		process_colors(t_mlx *mlx);
 void		process_jump(t_mlx *mlx);
 void		process_command(t_mlx *mlx);
+
+/*
+**	fuck norme
+*/
+void		get_fractal_type(t_mlx *mlx);
 
 /*
 **	image

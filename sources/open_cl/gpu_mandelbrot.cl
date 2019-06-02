@@ -26,6 +26,11 @@ void		image_put_pixel(__global int *img, size_t pos,
 		img[pos] = color;
 }
 
+double				d_abs(double n)
+{
+	return (n < 0 ? n * -1 : n);
+}
+
 int 				get_color(int iters, int max_iters, __global int *rand_params)
 {
 	int				red;
@@ -55,6 +60,7 @@ __kernel void		mandelbrot(__global int *params, __global double *d_params,
 	int				height;
 	int				width;
 	int				max_iters;
+	int 			is_burning;
 	size_t			g_id;
 
 	t_point			curr;
@@ -68,6 +74,7 @@ __kernel void		mandelbrot(__global int *params, __global double *d_params,
 	height = params[0];
 	width = params[1];
 	max_iters = params[2];
+	is_burning = params[3];
 
 	curr.x = g_id % width;
 	curr.y = g_id / height;
@@ -77,6 +84,8 @@ __kernel void		mandelbrot(__global int *params, __global double *d_params,
 	xscale = d_params[4];
 	yscale = d_params[5];
 
+	if (is_burning)
+		top -= 0.5;
 	cx = curr.x * xscale + left;
 	cy = curr.y * yscale + top;
 	zx = 0;
@@ -87,6 +96,11 @@ __kernel void		mandelbrot(__global int *params, __global double *d_params,
 		temp = zx * zx - zy * zy + cx;
 		zy = 2 * zx * zy + cy;
 		zx = temp;
+		if (is_burning)
+		{
+			zy = d_abs(zy);
+			zx = d_abs(zx);
+		}
 		iters++;
 	}
 	color = get_color(iters, max_iters, rand_params);
