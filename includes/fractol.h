@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 17:56:23 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/01 20:05:20 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/06/02 12:28:29 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@
 # include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <OpenCL/opencl.h>
+#ifdef __APPLE__
+#include <OpenCL/opencl.h>
+#else
+#include <CL/cl.h>
+#endif
 
 # include "libft.h"
 # include "structs.h"

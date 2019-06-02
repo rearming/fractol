@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 17:10:01 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/01 20:55:02 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/06/02 13:33:10 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,27 +45,6 @@ char		*get_cl_file(t_mlx *mlx, size_t *size)
 	return (cl_file);
 }
 
-/*void		cl_new_program(t_mlx *mlx)
-{
-	int			ret;
-	char		*cl_file;
-	size_t		size;
-
-	cl_file = get_cl_file(mlx, &size);
-	mlx->cl.program = clCreateProgramWithSource(mlx->cl.context, 1,
-										   (const char **)&cl_file, &size, &ret);
-	if ((ret = clBuildProgram(mlx->cl.program, 1, &mlx->cl.device_id, NULL, NULL, NULL)))
-		raise_error(ERR_OPENCL);
-	if (mlx->frac_type == MANDELBROT)
-		mlx->cl.kernel = clCreateKernel(mlx->cl.program, "mandelbrot", &ret);
-	if (mlx->frac_type == JULIA)
-		mlx->cl.kernel = clCreateKernel(mlx->cl.program, "julia", &ret);
-	if (ret)
-		raise_error(ERR_OPENCL);
-	cl_set_kernel(&mlx->cl);
-	free(cl_file);
-}*/
-
 void		cl_init(t_mlx *mlx)
 {
 	int			ret;
@@ -82,17 +61,12 @@ void		cl_init(t_mlx *mlx)
 	cl_file = get_cl_file(mlx, &size);
 	mlx->cl.program = clCreateProgramWithSource(mlx->cl.context, 1,
 												(const char **)&cl_file, &size, &ret);
+	if (ret)
+		raise_error(ERR_OPENCL);
 	if ((ret = clBuildProgram(mlx->cl.program, 1, &mlx->cl.device_id, NULL, NULL, NULL)))
 		raise_error(ERR_OPENCL);
 	if (mlx->frac_type == MANDELBROT)
-	{
-		if (mlx->cl.kernel) //todo cleanup
-		{
-			printf("hello?\n");
-			ret = clReleaseKernel(mlx->cl.kernel);
-		}
 		mlx->cl.kernel = clCreateKernel(mlx->cl.program, "mandelbrot", &ret);
-	}
 	if (mlx->frac_type == JULIA)
 		mlx->cl.kernel = clCreateKernel(mlx->cl.program, "julia", &ret);
 	if (ret)

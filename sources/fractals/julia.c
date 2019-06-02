@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 15:22:01 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/31 12:08:01 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/06/02 12:32:47 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ void			set_def_julia_params(t_mlx *mlx)
 	mlx->jul.hor_shift = 1;
 	mlx->jul.vert_shift = 800;
 	mlx->jul.scale = 0.7;
-	mlx->jul.c_part.x = 0.3690196078;
-	mlx->jul.c_part.y = 0.3169230769;
+	//mlx->jul.c_part.x = 0.3690196078;
+	//mlx->jul.c_part.y = 0.3169230769;
+	mlx->jul.c_part.x = 0.2035;
+	mlx->jul.c_part.y = 0.318;
 	mlx->jul.x_zoom = 1;
 	mlx->jul.y_zoom = 1;
 }

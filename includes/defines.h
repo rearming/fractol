@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:24:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/31 12:08:02 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/06/02 12:40:14 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,17 @@
 
 # include "fractol.h"
 
+#ifdef __APPLE__
 # define WIN_WIDTH 2550
 # define WIN_HEIGHT 1300
+#else
+# define WIN_WIDTH 1820
+# define WIN_HEIGHT 980
+#endif
+
+
+# define TRUE 1
+# define FALSE 0
 
 /*
 **	render modes
