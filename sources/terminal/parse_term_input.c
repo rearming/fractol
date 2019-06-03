@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:57:13 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/02 11:43:29 by rearming         ###   ########.fr       */
+/*   Updated: 2019/06/03 10:37:24 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ void		parse_term_input(t_mlx *mlx, int key)
 	if (mlx->term.cmd.status == PREPARE)
 		mlx->term.cmd.status = LISTEN;
 	check_backup(mlx, key);
-	bresen_line(mlx, (t_point){0, WIN_HEIGHT - 300, 0, WHITE},
-				(t_point){WIN_WIDTH, WIN_HEIGHT - 300, 0, 0});
+	bresen_line(mlx, (t_point){0, WIN_HEIGHT - 230, 0, WHITE},
+				(t_point){WIN_WIDTH, WIN_HEIGHT - 230, 0, 0});
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
 	mlx->term.buff[mlx->term.i] = get_char(key);
 	if (mlx->term.i == 0)

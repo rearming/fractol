@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 17:56:23 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/02 12:32:27 by rearming         ###   ########.fr       */
+/*   Updated: 2019/06/03 10:03:23 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@
 # include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
-#ifdef __APPLE__
-#include <OpenCL/opencl.h>
-#else
-#include <CL/cl.h>
-#endif
+
+# ifdef __APPLE__
+#  include <OpenCL/opencl.h>
+# else
+#  include <CL/cl.h>
+# endif
 
 # include "libft.h"
 # include "structs.h"
@@ -70,7 +71,7 @@ void		julia_render(t_mlx *mlx);
 */
 
 void		clean_opencl(t_mlx *mlx);
-
+void		exit_clean(t_mlx *mlx);
 /*
 **	error
 */

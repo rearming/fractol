@@ -6,29 +6,17 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 19:53:36 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/02 16:51:53 by rearming         ###   ########.fr       */
+/*   Updated: 2019/06/03 10:27:17 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void 		clean_opencl(t_mlx *mlx)
+static void	clean_opencl2(t_mlx *mlx)
 {
-	int ret;
+	int		ret;
 
 	ret = 0;
-	if (mlx->cl.queue)
-	{
-		ret += clFlush(mlx->cl.queue);
-		ret += clFinish(mlx->cl.queue);
-		ret += clReleaseCommandQueue(mlx->cl.queue);
-	}
-	if (mlx->cl.device_id)
-		clReleaseDevice(mlx->cl.device_id);
-	if (mlx->cl.kernel)
-		ret += clReleaseKernel(mlx->cl.kernel);
-	if (mlx->cl.program)
-		ret += clReleaseProgram(mlx->cl.program);
 	if (mlx->cl.mem_img)
 		ret += clReleaseMemObject(mlx->cl.mem_img);
 	if (mlx->cl.params)
@@ -41,5 +29,31 @@ void 		clean_opencl(t_mlx *mlx)
 		ret += clReleaseContext(mlx->cl.context);
 	if (ret)
 		raise_error(ERR_OPENCL_CLEAN);
-	//mlx->cl = (t_cl){0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+}
+
+void		clean_opencl(t_mlx *mlx)
+{
+	int ret;
+
+	ret = 0;
+	if (mlx->is_first || mlx->frac_type == TRIA)
+	{
+		mlx->is_first = mlx->is_first ? FALSE : mlx->is_first;
+		return ;
+	}
+	if (mlx->cl.queue)
+	{
+		ret += clFlush(mlx->cl.queue);
+		ret += clFinish(mlx->cl.queue);
+		ret += clReleaseCommandQueue(mlx->cl.queue);
+	}
+	if (mlx->cl.device_id)
+		clReleaseDevice(mlx->cl.device_id);
+	if (mlx->cl.kernel)
+		ret += clReleaseKernel(mlx->cl.kernel);
+	if (mlx->cl.program)
+		ret += clReleaseProgram(mlx->cl.program);
+	clean_opencl2(mlx);
+	if (ret)
+		raise_error(ERR_OPENCL_CLEAN);
 }

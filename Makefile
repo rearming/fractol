@@ -6,7 +6,7 @@
 #    By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/10 23:20:41 by sleonard          #+#    #+#              #
-#    Updated: 2019/05/31 17:12:53 by sleonard         ###   ########.fr        #
+#    Updated: 2019/06/03 10:30:32 by sleonard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ OPEN_CL_FILES =					\
 		opencl_utils.c			\
 		cl_gnl.c				\
 		cl_render.c				\
+		clean_opencl.c			\
 
 OPEN_CL_DIR =					\
 	$(SRC_DIR)open_cl/
@@ -59,6 +60,7 @@ TERMINAL_FILES =				\
 		terminal.c				\
 		parse_term_input.c		\
 		term_string_utils.c		\
+		term_processor.c		\
 
 TERMINAL_DIR =					\
 	$(SRC_DIR)terminal/
@@ -77,6 +79,7 @@ UTILS_FILES =					\
 		bresenham.c				\
 		rotation.c				\
 		screen_info.c			\
+		exit_clean.c			\
 
 UTILS_DIR =						\
 	$(SRC_DIR)utils/

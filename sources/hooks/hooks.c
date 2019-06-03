@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 17:10:27 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/02 12:03:46 by rearming         ###   ########.fr       */
+/*   Updated: 2019/06/03 16:20:53 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ int			cross_hook(void *param)
 	t_mlx	*mlx;
 
 	mlx = (t_mlx*)param;
-	clean_opencl(mlx);
-	exit(0);
+	exit_clean(mlx);
 	return (0);
 }
 
@@ -40,6 +39,8 @@ int			mouse_move(int x, int y, void *param)
 
 	mlx = (t_mlx*)param;
 	if (mlx->term.cmd.status == LISTEN)
+		return (0);
+	if (x > WIN_WIDTH || y > WIN_HEIGHT || x < 0 || y < 0)
 		return (0);
 	if (mlx->frac_type == JULIA)
 		mouse_change_julia(mlx, (t_point){x, y, 0, 0});
@@ -70,10 +71,7 @@ int			key_hook(int key_code, void *param)
 
 	mlx = (t_mlx*)param;
 	if (key_code == ESC)
-	{
-		clean_opencl(mlx);
-		exit(0);
-	}
+		exit_clean(mlx);
 	if (key_code == SHIFT)
 	{
 		mlx->term.cmd.status = PREPARE;

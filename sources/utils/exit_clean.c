@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.h                                           :+:      :+:    :+:   */
+/*   exit_cleanup.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/23 19:11:02 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/03 09:34:21 by sleonard         ###   ########.fr       */
+/*   Created: 2019/06/03 10:06:16 by sleonard          #+#    #+#             */
+/*   Updated: 2019/06/03 10:07:22 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERRORS_H
-# define ERRORS_H
+#include "fractol.h"
 
-# define ERR_INV_FILE 4
-# define ERR_INV_ARGS 6666
-# define ERR_INV_MAP 6
-# define ERR_MALLOC 7
-# define ERR_MLX_INIT 42
-# define ERR_MLX_WIN 43
-# define ERR_MLX_IMG 44
-# define ERR_MLX_IMG_DATA 45
-# define ERR_USAGE 46
-# define ERR_OPENCL 47
-# define ERR_OPENCL_CLEAN 48
-
-#endif
+void		exit_clean(t_mlx *mlx)
+{
+	if (!mlx->is_first)
+		clean_opencl(mlx);
+	exit(0);
+}

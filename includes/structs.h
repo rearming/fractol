@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/02 11:43:28 by rearming         ###   ########.fr       */
+/*   Updated: 2019/06/03 09:46:53 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ typedef struct			s_mlx
 	void				*win;
 	t_image				*img;
 	int					frac_type;
-	int 				is_burn;
+	int					is_burn;
 	int					rand[6];
 	t_mp				mp;
 	t_jul				jul;
@@ -132,6 +132,7 @@ typedef struct			s_mlx
 	t_cl				cl;
 	t_erm				term;
 	int					rend_device;
+	int					is_first;
 }						t_mlx;
 
 # define CL_BUFF_SIZE 10000

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:48:01 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/02 16:31:34 by rearming         ###   ########.fr       */
+/*   Updated: 2019/06/03 09:34:21 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void		change_max_iters(t_mlx *mlx)
 
 void		get_fractal_type(t_mlx *mlx)
 {
-	char 	*buff;
+	char	*buff;
 
 	buff = mlx->term.buff;
 	if (ft_strstr(buff, " julia") && mlx->term.cmd.action != SET)
