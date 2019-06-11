@@ -6,7 +6,7 @@
 #    By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/10 23:20:41 by sleonard          #+#    #+#              #
-#    Updated: 2019/06/11 11:37:44 by sleonard         ###   ########.fr        #
+#    Updated: 2019/06/11 14:00:59 by sleonard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -139,8 +139,18 @@ COMP_FLAGS = 					\
 INCLUDES = 						\
 	./includes/
 
+MINILIBX_DIR =
+ifdef __linux__
+MINILIBX_DIR := ./minilibx/minilibx_linux/
+else
+MINILIBX_DIR := ./minilibx/minilibx_mac/
+endif
+
+MINILIBX_LIB = 					\
+	$(MINILIBX_DIR)libmlx.a
+
 MLX_INCL =						\
-	./minilibx/
+	$(MINILIBX_DIR)
 
 COMP = gcc $(COMP_FLAGS) -I $(INCLUDES) -I $(LIBFT_INC) -I $(MLX_INCL)
 
@@ -148,11 +158,11 @@ MLX_FRAMEWORK = -framework OpenGL -framework AppKit
 
 OPEN_CL_FRAMEWORK = -framework OpenCL
 
-FRACTOL_FLAGS = -L $(LIBFT_DIR) -lft -L $(FT_PRINTF) -lftprintf -L $(MLX_LIB) -lmlx $(MLX_FRAMEWORK) $(OPEN_CL_FRAMEWORK)
+FRACTOL_FLAGS = -L $(LIBFT_DIR) -lft -L $(FT_PRINTF) -lftprintf -L $(MINILIBX_DIR) -lmlx $(MLX_FRAMEWORK) $(OPEN_CL_FRAMEWORK)
 
 all : $(NAME)
 
-$(NAME) : $(LIBFT) $(MINILIBX) $(OBJ_DIR) $(OBJ)
+$(NAME) : $(LIBFT) $(MINILIBX_LIB) $(OBJ_DIR) $(OBJ)
 	$(COMP) $(FRACTOL_FLAGS) $(OBJ) -o $(NAME)
 
 $(OBJ_DIR) :
@@ -183,6 +193,7 @@ clean :
 fclean : clean
 	@rm -rf $(NAME)
 	@make fclean -C $(LIBFT_DIR)
+	@make clean -C $(MINILIBX_DIR)
 
 re : fclean $(NAME)
 
@@ -204,8 +215,5 @@ $(LIBFT) :
 # 						MINILIBX
 # ============================================================================ #
 
-MINILIBX_DIR =			\
-	./minilibx/			\
-
-$(MINILIBX) :
-	@make -C $(MINILIBX_DIR)
+$(MINILIBX_LIB):
+	@echo $(MINILIBX_DIR)

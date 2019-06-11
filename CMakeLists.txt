@@ -50,27 +50,49 @@ set(Sources
 		sources/hooks/hooks_triangle.c
 		sources/utils/screen_info.c sources/utils/exit_clean.c)
 
-set(mlx_includes
-        /usr/local/include/
-		#/usr/local/cuda-10.1/targets/x86_64-linux/include/
-		#/usr/include/X11/
+if (__linux__)
+	set(mlx_includes
+        ./minilibx/minilibx_linux
+		/usr/local/cuda-10.1/targets/x86_64-linux/include/
+		/usr/include/X11/
 		)
+
+	set(X11_lib_dirs
+			/usr/lib/X11
+			/usr/X11/lib
+			)
+
+	set(X11_libs
+			"OpenCL"
+			"mlx_Linux"
+			"Xext"
+			"X11"
+			)
+
+	message(hello, Linux)
+
+else()
+	set(mlx_includes
+			#./minilibx/minilibx_mac
+			)
+
+	message(hello, Mac)
+endif()
 
 include_directories(includes
 
         ${Includes}
         ${libft_includes}
         ${ft_printf_includes}
-        ${mlx_includes}
+		${mlx_includes}
         )
 
 link_directories(
+
         ./libft/
         ./libft/ft_printf/
-        /usr/local/lib/
-		#/usr/lib/X11
-		#/usr/X11/lib
-		#/home/rearming/21utils/mlx_repo/minilibx/)
+		${mlx_includes}
+		${X11_lib_dirs}
 )
 
 add_executable(fractol
@@ -87,10 +109,7 @@ target_link_libraries(fractol
         "-framework OpenGL"
         "-framework AppKit"
         "-framework OpenCL"
-		#"OpenCL"
-		#"mlx_Linux"
-		#"Xext"
-		#"X11"
+		${X11_libs}
 )
 
 
