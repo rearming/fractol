@@ -6,7 +6,7 @@
 #    By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/10 23:20:41 by sleonard          #+#    #+#              #
-#    Updated: 2019/06/03 10:30:32 by sleonard         ###   ########.fr        #
+#    Updated: 2019/06/11 11:37:44 by sleonard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -125,7 +125,7 @@ FT_PRINTF = 					\
 	./libft/ft_printf/
 
 MLX_LIB = 						\
-	/usr/local/lib/
+	./minilibx/
 
 OBJ_DIR =						\
 	./temp/
@@ -140,7 +140,7 @@ INCLUDES = 						\
 	./includes/
 
 MLX_INCL =						\
-	/usr/local/include/
+	./minilibx/
 
 COMP = gcc $(COMP_FLAGS) -I $(INCLUDES) -I $(LIBFT_INC) -I $(MLX_INCL)
 
@@ -152,7 +152,7 @@ FRACTOL_FLAGS = -L $(LIBFT_DIR) -lft -L $(FT_PRINTF) -lftprintf -L $(MLX_LIB) -l
 
 all : $(NAME)
 
-$(NAME) : $(LIBFT) $(OBJ_DIR) $(OBJ)
+$(NAME) : $(LIBFT) $(MINILIBX) $(OBJ_DIR) $(OBJ)
 	$(COMP) $(FRACTOL_FLAGS) $(OBJ) -o $(NAME)
 
 $(OBJ_DIR) :
@@ -199,3 +199,13 @@ LIBFT_INC = 			\
 $(LIBFT) :
 	@make -C $(LIBFT_DIR)
 	@make printf -C $(LIBFT_DIR)
+
+# ============================================================================ #
+# 						MINILIBX
+# ============================================================================ #
+
+MINILIBX_DIR =			\
+	./minilibx/			\
+
+$(MINILIBX) :
+	@make -C $(MINILIBX_DIR)

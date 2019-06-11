@@ -250,7 +250,7 @@ char				*ft_strmap(char const *s, char (*f)(char));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 /*
-**	Checks whether (s1) string and (s2) string are identical.
+**	Checks whether (s1) string and (s2) string are identical, returns 0 if not.
 */
 int					ft_strequ(char const *s1, char const *s2);
 
