@@ -32,5 +32,6 @@ t_mlx		*ft_mlx_init(void)
 	mlx->img->bpp /= 8;
 	mlx->term = (t_erm){{0}, {{0}}, 0, 0, {0, 0, 0, 0}};
 	mlx->is_first = TRUE;
+	mlx->is_burn = FALSE;
 	return (mlx);
 }
