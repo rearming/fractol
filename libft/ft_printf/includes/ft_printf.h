@@ -6,7 +6,7 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 04:17:07 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/23 17:02:34 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/10/22 21:49:02 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,21 @@ extern t_printf	g_pf;
 */
 
 int						ft_printf(const char *format, ...);
+int						ft_printf_fd(int fd, const char *format, ...);
+int						ft_sprintf(char **out_str, const char *format, ...);
+
 void					add_buf_node(char *part);
 void					free_list(t_list **list);
+char					*get_formatted_string(int *out_symbols_count,
+							const char *format);
 
 /*
 ** output functions
 */
 
 char					*get_buffer(t_list **list, size_t total_len);
-int						print_list(t_list **list, int fd);
+char					*get_result_string(t_list **list,
+							int *out_symbols_count);
 
 /*
 ** format parsing functions

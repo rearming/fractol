@@ -134,7 +134,7 @@ SRC_DIR =						\
 	./sources/
 
 COMP_FLAGS = 					\
-	-Wall -Wextra -Werror -O2
+	-Wall -Wextra  -O2
 
 INCLUDES = 						\
 	./includes/
@@ -152,7 +152,7 @@ MINILIBX_LIB = 					\
 MLX_INCL =						\
 	$(MINILIBX_DIR)
 
-COMP = gcc $(COMP_FLAGS) -I $(INCLUDES) -I $(LIBFT_INC) -I $(MLX_INCL)
+COMP = clang $(COMP_FLAGS) -I $(INCLUDES) -I $(LIBFT_INC) -I $(MLX_INCL)
 
 MLX_FRAMEWORK = -framework OpenGL -framework AppKit
 

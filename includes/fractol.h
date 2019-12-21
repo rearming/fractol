@@ -15,9 +15,13 @@
 
 # include <stdio.h>
 # include <math.h>
-# include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
+# ifndef __APPLE__
+#  include "../minilibx/minilibx_linux/includes/mlx.h"
+# else
+# includes <mlx.h>
+# endif
 
 # ifdef __APPLE__
 #  include <OpenCL/opencl.h>

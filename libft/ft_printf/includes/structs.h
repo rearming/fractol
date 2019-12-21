@@ -6,7 +6,7 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 11:28:25 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/23 17:04:00 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/10/22 21:49:02 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct			s_format
 typedef struct			s_printf
 {
 	t_list				*buf;
-	va_list				ap;
+	va_list				args;
 }						t_printf;
 
 union					u_ld

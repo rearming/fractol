@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 04:21:34 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/23 16:49:03 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/10/22 21:49:02 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,24 @@ char		*get_buffer(t_list **list, size_t total_len)
 		free(temp->content);
 		free(temp);
 	}
+	buffer[total_len] = '\0';
 	return (buffer);
 }
 
-int			print_list(t_list **list, int fd)
+char		*get_result_string(t_list **list, int *out_symbols_count)
 {
-	size_t		total_len;
 	t_list		*tmp_count;
-	char		*buffer;
 
 	if (!list)
 		raise_error(ERR_NULL_LIST);
 	tmp_count = *list;
-	total_len = 0;
+	*out_symbols_count = 0;
 	while (tmp_count)
 	{
-		total_len += tmp_count->content_size - 1;
+		*out_symbols_count += tmp_count->content_size - 1;
 		tmp_count = tmp_count->next;
 	}
-	buffer = get_buffer(&g_pf.buf, total_len);
-	write(fd, buffer, total_len);
-	free(buffer);
-	return (total_len);
+	return (get_buffer(&g_pf.buf, *out_symbols_count));
 }
 
 t_format	get_format(char *part)
@@ -110,13 +106,11 @@ void		add_buf_node(char *part)
 		add_base(part, format);
 }
 
-int			ft_printf(const char *format, ...)
+char		*get_formatted_string(int *out_symbols_count, const char *format)
 {
 	int			i;
 	char		**parts;
-	int			ret_val;
 
-	va_start(g_pf.ap, format);
 	parts = split_flags(format, '%');
 	i = 0;
 	while (parts[i])
@@ -124,8 +118,6 @@ int			ft_printf(const char *format, ...)
 		add_buf_node(parts[i]);
 		i++;
 	}
-	va_end(g_pf.ap);
-	ret_val = print_list(&g_pf.buf, 1);
 	free(parts);
-	return (ret_val);
+	return (get_result_string(&g_pf.buf, out_symbols_count));
 }

@@ -6,14 +6,11 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 20:44:58 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/13 11:19:47 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 11:04:43 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include "get_next_line.h"
-#include <stdlib.h>
-#include <unistd.h>
+#include "libft.h"
 
 int			cut_result(char **line, char **back_str)
 {
@@ -21,7 +18,6 @@ int			cut_result(char **line, char **back_str)
 	char	*tmp;
 
 	*line = NULL;
-	tmp = NULL;
 	len = 0;
 	while ((*back_str)[len] != '\n' && (*back_str)[len] != '\0')
 		len++;

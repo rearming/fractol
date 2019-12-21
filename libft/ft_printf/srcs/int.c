@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:35:47 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/23 16:50:00 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/10/22 21:49:02 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,36 +15,36 @@
 char		*convert_signed_arg(t_format format)
 {
 	if (format.type_flag == NO_FLAG)
-		return (ft_lltoa(va_arg(g_pf.ap, int)));
+		return (ft_lltoa(va_arg(g_pf.args, int)));
 	if (format.type_flag == CHAR)
-		return (ft_lltoa((char)va_arg(g_pf.ap, int)));
+		return (ft_lltoa((char)va_arg(g_pf.args, int)));
 	if (format.type_flag == INT_MAX)
-		return (ft_lltoa(va_arg(g_pf.ap, intmax_t)));
+		return (ft_lltoa(va_arg(g_pf.args, INTMAX_T)));
 	if (format.type_flag == SHORT)
-		return (ft_lltoa((short)va_arg(g_pf.ap, int)));
+		return (ft_lltoa((short)va_arg(g_pf.args, int)));
 	if (format.type_flag == LONG)
-		return (ft_lltoa(va_arg(g_pf.ap, long)));
+		return (ft_lltoa(va_arg(g_pf.args, long)));
 	if (format.type_flag == LONG_LONG || format.type_flag == LDOUBLE)
-		return (ft_lltoa(va_arg(g_pf.ap, long long)));
+		return (ft_lltoa(va_arg(g_pf.args, long long)));
 	return (NULL);
 }
 
 char		*convert_unsigned_arg(t_format format)
 {
 	if (format.type == PTR)
-		return (ft_ulltoa(va_arg(g_pf.ap, unsigned long long)));
+		return (ft_ulltoa(va_arg(g_pf.args, unsigned long long)));
 	if (format.type_flag == NO_FLAG)
-		return (ft_ulltoa(va_arg(g_pf.ap, unsigned)));
+		return (ft_ulltoa(va_arg(g_pf.args, unsigned)));
 	if (format.type_flag == INT_MAX)
-		return (ft_ulltoa(va_arg(g_pf.ap, intmax_t)));
+		return (ft_ulltoa(va_arg(g_pf.args, INTMAX_T)));
 	if (format.type_flag == LONG)
-		return (ft_ulltoa(va_arg(g_pf.ap, unsigned long)));
+		return (ft_ulltoa(va_arg(g_pf.args, unsigned long)));
 	if (format.type_flag == CHAR)
-		return (ft_ulltoa((unsigned char)va_arg(g_pf.ap, unsigned)));
+		return (ft_ulltoa((unsigned char)va_arg(g_pf.args, unsigned)));
 	if (format.type_flag == SHORT)
-		return (ft_ulltoa((unsigned short)va_arg(g_pf.ap, unsigned)));
+		return (ft_ulltoa((unsigned short)va_arg(g_pf.args, unsigned)));
 	if (format.type_flag == LONG_LONG || format.type_flag == LDOUBLE)
-		return (ft_ulltoa(va_arg(g_pf.ap, unsigned long long)));
+		return (ft_ulltoa(va_arg(g_pf.args, unsigned long long)));
 	return (NULL);
 }
 

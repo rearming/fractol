@@ -6,23 +6,11 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 18:33:02 by sselusa           #+#    #+#             */
-/*   Updated: 2019/05/22 11:56:22 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 11:04:43 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static size_t		pass_spaces(const char *str)
-{
-	size_t	pos;
-
-	if (!str)
-		return (0);
-	pos = 0;
-	while ((str[pos] > 8 && str[pos] < 14) || str[pos] == 32)
-		pos++;
-	return (pos);
-}
 
 static int			get_sign(const char *str, size_t *pos)
 {
@@ -44,7 +32,6 @@ int					ft_atoi(const char *str)
 	int					sign;
 	size_t				pos;
 
-	sign = 1;
 	num = 0;
 	pos = pass_spaces(str);
 	sign = get_sign(str, &pos);

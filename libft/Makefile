@@ -6,7 +6,7 @@
 #    By: bshanae <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/05 13:31:11 by bshanae           #+#    #+#              #
-#    Updated: 2019/05/31 12:08:01 by sleonard         ###   ########.fr        #
+#    Updated: 2019/10/28 18:57:40 by sleonard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ ATOI_ITOA_FILES =		\
 	ft_lltoa_base.c		\
 	ft_ulltoa.c			\
 	ft_ulltoa_base.c	\
+	ft_strtod.c			\
 
 ATOI_ITOA_DIR = 			\
 	./src_atoi_itoa/
@@ -39,6 +40,8 @@ MATH_FILES =			\
 	ft_swap.c			\
 	is_even.c			\
 	ft_abs.c			\
+	ft_max.c			\
+	ft_min.c			\
 
 MATH_DIR =				\
 	./src_math/
@@ -78,6 +81,8 @@ UTILS_FILES =			\
 	ft_isascii.c		\
 	ft_isprint.c		\
 	ft_isalnum.c		\
+	ft_isspace.c		\
+	pass_spaces.c		\
 
 UTILS_DIR =				\
 	./src_utils/
@@ -119,6 +124,11 @@ STR_FILES = 			\
 	ft_strsplit.c       \
 	ft_toupper.c		\
 	ft_tolower.c		\
+	ft_trim_c.c			\
+	ft_strdup_l.c		\
+	ft_readfile.c		\
+	ft_strlen_char.c	\
+	gnl.c				\
 
 STR_DIR = 				\
 	./src_string/
@@ -156,6 +166,10 @@ LIST_FILES = 			\
 	ft_lstmap.c			\
 	ft_lstnew.c			\
 	ft_lstaddback.c 	\
+	ft_lstaddback_p.c	\
+	ft_lstdel_p.c		\
+	ft_lstnew_p.c		\
+	ft_lstprint.c		\
 
 LIST_DIR = 				\
 	./src_list/
@@ -167,16 +181,22 @@ LIST_OBJ = $(addprefix $(OBJ_DIR), $(LIST_FILES:.c=.o))
 # ============================================================================ #
 
 BTREE_FILES = 			\
-	#ft_btreeclean.c	\
-	#ft_btreedepth.c	\
-	#ft_btreefind.c		\
-	#ft_btreeinfix.c	\
-	#ft_btreeinsert.c	\
-	#ft_btreenew.c		\
-	#ft_btreeprefix.c	\
-	#ft_btreesuffix.c
+	btree_create_node.c          \
+    btree_insert_data.c          \
+    btree_apply_preorder.c       \
+    btree_apply_inorder.c        \
+    btree_apply_postorder.c      \
+    btree_find_item.c            \
+    btree_level_count.c          \
+    free_btree.c                 \
+    avl_tree_create_node.c       \
+    avl_tree_helper_functions.c  \
+    avl_tree_rebalancing.c       \
+    avl_insert_data.c            \
+    avl_delete_node.c            \
+
 BTREE_DIR = 			\
-	./src_btree/
+	./src_binary_trees/
 
 BTREE_OBJ = $(addprefix $(OBJ_DIR), $(BTREE_FILES:.c=.o))
 
@@ -203,13 +223,17 @@ OBJ = 					\
 
 OBJ_DIR = ./temp/
 
-COMP = gcc -Wall -Wextra -Werror -O2 -I ./includes
+COMP = clang -Wall -Wextra -Werror -O2 -fPIC -I ./includes
 
-all : $(NAME)
+all : update $(NAME) printf
 
 $(NAME)	: $(OBJ_DIR) $(OBJ)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
+
+update:
+	@git submodule init ft_printf
+	@git submodule update
 
 # folder
 $(OBJ_DIR) :

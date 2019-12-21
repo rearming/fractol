@@ -6,12 +6,12 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 12:26:00 by sselusa           #+#    #+#             */
-/*   Updated: 2019/05/23 15:47:26 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/10/22 21:49:02 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "structs.h"
+#include "ft_structs.h"
 #include <stdio.h>
 #include <limits.h>
 
@@ -26,7 +26,7 @@ static char			*combine_ld(unsigned long fract,
 	str_tmp_f = ft_ulltoa(fract);
 	str_tmp_w = ft_ulltoa(whole);
 	len = ft_strlen(str_tmp_f) + ft_strlen(str_tmp_w) + (sign == -1 ? 1 : 0);
-	str = ft_strnew(len);
+	str = ft_strnew(len + 1);
 	if (sign == -1)
 		str[0] = '-';
 	str = ft_strcat(str, str_tmp_w);
@@ -63,22 +63,20 @@ static void			get_a(t_ld *ld, int sign,
 	ld->str = combine_ld(fract, whole, sign, precision);
 }
 
-static t_ld			*parse_ld(long double num, int precision)
+static t_ld			parse_ld(long double num, int precision)
 {
 	__int128_t			mask;
 	int					sign;
-	t_ld				*ld;
+	t_ld				ld;
 
 	num = (double)num;
-	if (!(ld = (t_ld*)malloc(sizeof(t_ld))))
-		return (NULL);
-	ld->str = NULL;
-	ld->ld.ld_tmp = num;
+	ld.str = NULL;
+	ld.ld.ld_tmp = num;
 	mask = (__int128_t)0x7FFF << 64;
-	ld->exp = (int)((ld->ld.int_tmp & mask) >> 64);
+	ld.exp = (int)((ld.ld.int_tmp & mask) >> 64);
 	mask = (__int128_t)1 << 73;
-	ld->negative = (int)((ld->ld.int_tmp & mask) >> 73);
-	if (check_fields(ld))
+	ld.negative = (int)((ld.ld.int_tmp & mask) >> 73);
+	if (check_fields(&ld))
 		return (ld);
 	sign = 1;
 	if (num < 0)
@@ -86,18 +84,18 @@ static t_ld			*parse_ld(long double num, int precision)
 		sign = -1;
 		num *= -1;
 	}
-	get_a(ld, sign, num, precision);
+	get_a(&ld, sign, num, precision);
 	return (ld);
 }
 
 static char			*ftoa(long double num, int precision)
 {
-	t_ld				*ld;
+	t_ld				ld;
 
 	if (precision == NO_FLAG)
 		precision = 6;
 	ld = parse_ld(num, precision);
-	return (ld->str);
+	return (ld.str);
 }
 
 void				add_double(char *part, t_format format)
@@ -106,8 +104,8 @@ void				add_double(char *part, t_format format)
 
 	format.flags.zero =
 			format.prec != NO_FLAG ? 0 : format.flags.zero;
-	arg = (ftoa(format.type == LDOUBLE ? va_arg(g_pf.ap, long double)
-			: va_arg(g_pf.ap, double), format.prec));
+	arg = (ftoa(format.type == LDOUBLE ? va_arg(g_pf.args, long double)
+			: va_arg(g_pf.args, double), format.prec));
 	format.prec = format.prec == NO_FLAG ? 0 : format.prec;
 	ft_isdigit(arg[0]) && format.flags.plus ? format.width -= 1 : format.width;
 	fill_float_format(format, arg);

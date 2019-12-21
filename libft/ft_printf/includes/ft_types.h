@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:07:22 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/23 15:12:35 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 11:04:43 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,11 @@
 # define NO_FLAG -50
 # define NO_VALUE -51
 # define BREAK -3
+
+# ifdef __linux__
+#  define INTMAX_T __intmax_t
+# else
+#  define INTMAX_T intmax_t
+# endif
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:20:52 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/23 15:47:26 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/10/22 21:49:02 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		add_text(char *part, t_format format)
 void		add_string(char *part, t_format format)
 {
 	if (format.type == STRING)
-		fill_text_format(format, va_arg(g_pf.ap, char*));
+		fill_text_format(format, va_arg(g_pf.args, char*));
 	ft_lstaddback(&g_pf.buf, &part[format.i],
 			ft_strlen(&part[format.i]) + 1);
 	free(part);
@@ -36,7 +36,7 @@ void		add_char(char *part, t_format format)
 	int		arg;
 
 	res = ft_strnew(4);
-	arg = va_arg(g_pf.ap, int);
+	arg = va_arg(g_pf.args, int);
 	if (format.type == CHAR)
 		res[0] = (char)arg;
 	else if (format.type == WCHAR)

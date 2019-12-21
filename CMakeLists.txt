@@ -3,19 +3,6 @@ project(fractol C)
 
 set(CMAKE_C_STANDARD 11)
 
-set(Includes
-        includes/colors.h
-        includes/errors.h
-        includes/fractol.h
-		includes/structs.h
-        )
-
-set(libft_includes
-        libft/includes)
-
-set(ft_printf_includes
-        libft/ft_printf/includes)
-
 set(Sources
         debug/print_params.c
 
@@ -48,68 +35,54 @@ set(Sources
         sources/fractals/julia.c
         sources/fractals/triangle.c
 		sources/hooks/hooks_triangle.c
-		sources/utils/screen_info.c sources/utils/exit_clean.c)
+		sources/utils/screen_info.c
+		sources/utils/exit_clean.c)
 
-if (__linux__)
+if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 	set(mlx_includes
-        ./minilibx/minilibx_linux
-		/usr/local/cuda-10.1/targets/x86_64-linux/include/
-		/usr/include/X11/
+        ./minilibx/minilibx_linux/includes
 		)
-
 	set(X11_lib_dirs
 			/usr/lib/X11
-			/usr/X11/lib
+			./minilibx/minilibx_linux/
 			)
-
-	set(X11_libs
+	set(lib_names
 			"OpenCL"
-			"mlx_Linux"
 			"Xext"
 			"X11"
 			)
-
 	message(hello, Linux)
-
 else()
-	set(mlx_includes
-			#./minilibx/minilibx_mac
+	set(lib_names
+			"-framework OpenGL"
+			"-framework AppKit"
+			"-framework OpenCL"
 			)
-
 	message(hello, Mac)
 endif()
 
 include_directories(includes
-
-        ${Includes}
-        ${libft_includes}
-        ${ft_printf_includes}
+		includes
+		libft/includes
 		${mlx_includes}
         )
 
 link_directories(
-
         ./libft/
         ./libft/ft_printf/
-		${mlx_includes}
 		${X11_lib_dirs}
 )
 
 add_executable(fractol
-
         ${Sources}
         )
 
 target_link_libraries(fractol
-
 		"m"
         "ftprintf"
 		"ft"
         "mlx"
-        "-framework OpenGL"
-        "-framework AppKit"
-        "-framework OpenCL"
-		${X11_libs}
+		${lib_names}
 )
 
 

@@ -6,13 +6,13 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 18:19:09 by rearming          #+#    #+#             */
-/*   Updated: 2019/05/22 19:21:25 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 11:04:43 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		skip_obs(char *str, int *is_neg)
+static int		skip_obs(const char *str, int *is_neg)
 {
 	int		i;
 
@@ -31,7 +31,7 @@ static int		skip_obs(char *str, int *is_neg)
 	return (i);
 }
 
-long long		ft_atoll_base(char *str, int base)
+long long		ft_atoll_base(const char *str, int base)
 {
 	int			i;
 	int			is_neg;

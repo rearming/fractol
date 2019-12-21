@@ -6,7 +6,7 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 15:58:41 by sselusa           #+#    #+#             */
-/*   Updated: 2019/06/01 19:27:03 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/10/24 15:26:51 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,9 @@
 # include <string.h>
 # include <fcntl.h>
 
-/*
-**	[Defines]
-*/
-# define OVERFLOW_FT 922337203685477580L
-
-/*
-**	[Types]
-*/
-typedef struct		s_list
-{
-	void			*content;
-	size_t			content_size;
-	struct s_list	*next;
-}					t_list;
+# include "ft_defines.h"
+# include "ft_structs.h"
+# include "ft_btrees.h"
 
 /*
 **	Fills (src) with (len) bytes of (chr). Returns a pointer to the
@@ -106,7 +95,7 @@ char				*ft_strncpy(char *dst, const char *src, size_t len);
 ** Adds to (str1) string a copy of (str2) string, explicitly adding a \0.
 ** Returns a pointer to (str1).
 */
-char				*ft_strcat(char *str1, const char *str2);
+char				*ft_strcat(char *dest, const char *src);
 
 /*
 **	Adds to (str1) string a copy of (str2) string, not more than (len)
@@ -250,7 +239,7 @@ char				*ft_strmap(char const *s, char (*f)(char));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 /*
-**	Checks whether (s1) string and (s2) string are identical, returns 0 if not.
+**	Checks whether (s1) string and (s2) string are identical.
 */
 int					ft_strequ(char const *s1, char const *s2);
 
@@ -365,22 +354,22 @@ t_list				*ft_lstmap(t_list *alst, t_list *(*f)(t_list *elem));
 **	Obviously gets next line from (fd),
 **	returns -1 on error, 1 on success and 0 on EOF.
 */
-int					get_next_line(const int fd, char **line);
+int					get_next_line(int fd, char **line);
 
 /*
 **	Same as atoi (str) but returns number in (base).
 */
-long long			ft_atoll_base(char *str, int base);
+long long			ft_atoll_base(const char *str, int base);
 
 /*
 **	Returns count of digits in (nb).
 */
-int					ft_count_digits(int nb);
+int					ft_count_digits(long long nb);
 
 /*
 **	Returns count of digits in (nb) with (base).
 */
-int					ft_count_digits_base(char *str, int base);
+int					ft_count_digits_base(const char *str, int base);
 
 /*
 **	Returns (nbr) in (power).
@@ -422,7 +411,7 @@ char				*ft_lltoa_base(long long nbr,
 /*
 **	Same as atoi (str) but working with long long integers
 */
-long long			ft_atoll(char *str);
+long long			ft_atoll(const char *str);
 
 /*
 **	Same as atoi (str) but working with unsigned long long integers
@@ -464,11 +453,89 @@ char				**clean_chr_mtrx(char **str);
 /*
 **	Same as ft_strlen, but returns length of string before specific char.
 */
-size_t				ft_strlen_char(char *str, char breaker);
+size_t				ft_strlen_char(const char *str, char breaker);
+
+/*
+**	Returns string trimmed by 'breaker' symbol.
+**
+** 	Used functions:
+**	1. malloc
+**	2. ft_strlen
+**	3. ft_strchr
+**	4. ft_memcpy
+*/
+
+/*
+**	Works like ft_strdup, but no strlen here.
+*/
+char				*ft_strdup_l(const char *src, size_t len);
+
+char				*ft_trim_c(const char *str, char breaker);
+
+/*
+**	Takes begin of t_list and function that prints node of the list.
+**	It uses fflush() function to generate correct output even if print function
+** 	doing buffer management. This function is SLOW. Use only for debug purposes.
+*/
+void				ft_lstprint(t_list *begin, void (*print_function)(t_list*));
+
+/*
+**	lst_p functions family works the same as lst functions,
+**	but inside using raw pointers, passed to them, instead of malloc like
+**	lst functions do.
+*/
+
+t_list				*ft_lstnew_p(void *content, size_t content_size);
+void				ft_lstaddback_p(t_list **list, void *content,
+									size_t content_size);
+void				ft_lstdel_p(t_list **begin);
+
+int					ft_max(int a, int b);
 
 /*
 **	Same usage as standard library printf.
 */
+
 int					ft_printf(const char *format, ...);
+
+/*
+**	Same usage as standard library printf but sends output to specified fd.
+*/
+int					ft_printf_fd(int fd, const char *format, ...);
+
+/*
+**	Same usage as standard library sprintf.
+*/
+int					ft_sprintf(char **out_str, const char *format, ...);
+
+/*
+**	Converts null-terminated string to double value.
+**	Returns -1.0 in case of overflow
+**	(whole or fractional part > long long max / < long long min ).
+**	Returns 0.0 in case of invalid string.
+*/
+double				ft_strtod(const char *str);
+
+/*
+**	Allocate and return contents of file (fd). Returns NULL in case of  error.
+*/
+char				*ft_readfile(int fd, size_t *out_size);
+
+/*
+** Returns 1 if char c is space / tab / etc.
+*/
+int					ft_isspace(char c);
+
+/*
+**	Skips all spaces, returns index of str after last space.
+*/
+size_t				pass_spaces(const char *str);
+
+/*
+**	Simple and stable version of get_next_line. Doesn't support multiple fd.
+*/
+int					gnl(int fd, char **line);
+
+int					ft_min(int a, int b);
 
 #endif

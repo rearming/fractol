@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:28:42 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/23 16:23:00 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/10/22 21:49:02 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int			get_width(char *part, int *i)
 	if (part[*i] == '*')
 	{
 		(*i)++;
-		return (va_arg(g_pf.ap, int));
+		return (va_arg(g_pf.args, int));
 	}
 	if (!ft_isdigit(part[*i]))
 		return (NO_VALUE);
@@ -66,7 +66,7 @@ int			get_precision(char *part, int *i)
 	if (part[*i] == '*')
 	{
 		(*i)++;
-		return (va_arg(g_pf.ap, int));
+		return (va_arg(g_pf.args, int));
 	}
 	res = ft_atoi(&part[*i]);
 	if (ft_isdigit(part[*i]))
