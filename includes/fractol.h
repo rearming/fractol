@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 17:56:23 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/03 10:03:23 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/12/26 18:19:16 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,7 @@
 # include <math.h>
 # include <unistd.h>
 # include <stdlib.h>
-# ifndef __APPLE__
-#  include "../minilibx/minilibx_linux/includes/mlx.h"
-# else
-# includes <mlx.h>
-# endif
+# include <mlx.h>
 
 # ifdef __APPLE__
 #  include <OpenCL/opencl.h>

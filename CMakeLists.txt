@@ -1,6 +1,12 @@
 cmake_minimum_required(VERSION 3.14)
 project(fractol C)
 
+add_compile_options(-Wall -Wextra)
+
+if (${CMAKE_BUILD_TYPE} STREQUAL "Release")
+	add_compile_options(-Werror -O2)
+endif()
+
 set(CMAKE_C_STANDARD 11)
 
 set(Sources
@@ -39,25 +45,26 @@ set(Sources
 		sources/utils/exit_clean.c)
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-	set(mlx_includes
-        ./minilibx/minilibx_linux/includes
-		)
-	set(X11_lib_dirs
+	INCLUDE(FindPkgConfig)
+	PKG_SEARCH_MODULE(OPENCL REQUIRED OpenCL)
+
+	set(graphical_includes
+        ./minilibx/minilibx_linux/includes)
+	set(graphical_lib_dirs
 			/usr/lib/X11
-			./minilibx/minilibx_linux/
-			)
-	set(lib_names
-			"OpenCL"
+			./minilibx/minilibx_linux/)
+	set(graphical_lib_names
+			${OPENCL_LIBRARIES}
 			"Xext"
-			"X11"
-			)
+			"X11")
 	message(hello, Linux)
 else()
-	set(lib_names
+	set(graphical_includes
+			./minilibx/minilibx_mac/)
+	set(graphical_lib_names
 			"-framework OpenGL"
 			"-framework AppKit"
-			"-framework OpenCL"
-			)
+			"-framework OpenCL")
 	message(hello, Mac)
 endif()
 
@@ -70,7 +77,7 @@ include_directories(includes
 link_directories(
         ./libft/
         ./libft/ft_printf/
-		${X11_lib_dirs}
+		${graphical_lib_dirs}
 )
 
 add_executable(fractol
@@ -82,7 +89,7 @@ target_link_libraries(fractol
         "ftprintf"
 		"ft"
         "mlx"
-		${lib_names}
+		${graphical_lib_names}
 )
 
 
