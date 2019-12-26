@@ -1,11 +1,11 @@
 # fract'ol
-Fractal rendering project (42-fract'ol)
+Fractal rendering project (42-fract'ol), accelerated via OpenCL.
 
 ### Build:
 ```
 ./compile.sh
 ```
-
+**WARNING! OpenCL library and headers are requiered to build and run this project!**
 ### Run:
 ```
 ./fractol [name]
