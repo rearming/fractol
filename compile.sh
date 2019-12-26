@@ -7,15 +7,15 @@ else
   make
   cd ../..
 fi
-if [[ ! -d "libft" ]]; then
+if [[ ! -f "libft/Makefile" ]]; then
   git submodule init
   git submodule update --merge --remote
 fi
 cd libft
-make
+make -j 4
 cd ..
 mkdir build
 cd build || echo "can't make build directory!"
 cmake -DCMAKE_BUILD_TYPE=Release ..
-make fractol
+make fractol -j 4
 mv fractol ..
