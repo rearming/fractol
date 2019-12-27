@@ -3,7 +3,7 @@ project(fractol C)
 
 add_compile_options(-Wall -Wextra)
 
-if (${CMAKE_BUILD_TYPE} STREQUAL "Release")
+if (${CMAKE_BUILD_TYPE} MATCHES "Release")
 	add_compile_options(-Werror -O2)
 endif()
 
@@ -49,7 +49,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 	PKG_SEARCH_MODULE(OPENCL REQUIRED OpenCL)
 
 	set(graphical_includes
-        ./minilibx/minilibx_linux/includes)
+        	./minilibx/minilibx_linux/includes/)
 	set(graphical_lib_dirs
 			/usr/lib/X11
 			./minilibx/minilibx_linux/)
@@ -57,7 +57,6 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 			${OPENCL_LIBRARIES}
 			"Xext"
 			"X11")
-	message(hello, Linux)
 else()
 	set(graphical_includes
 			./minilibx/minilibx_mac/)
@@ -65,13 +64,12 @@ else()
 			"-framework OpenGL"
 			"-framework AppKit"
 			"-framework OpenCL")
-	message(hello, Mac)
 endif()
 
 include_directories(includes
 		includes
 		libft/includes
-		${mlx_includes}
+		${graphical_includes}
         )
 
 link_directories(

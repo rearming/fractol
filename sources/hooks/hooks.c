@@ -49,12 +49,10 @@ int			mouse_move(int x, int y, void *param)
 	return (0);
 }
 
-int			mouse_action(int button_code, int x, int y, void *param)
+int			mouse_action(int button_code, void *param)
 {
 	t_mlx		*mlx;
-	t_point		pos;
 
-	pos = (t_point){x, y, 0, 0};
 	mlx = (t_mlx*)param;
 	if (mlx->term.cmd.status == LISTEN)
 		return (0);

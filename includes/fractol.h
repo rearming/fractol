@@ -86,7 +86,7 @@ void		show_usage(void);
 int			cross_hook(void *param);
 int			key_hook(int key_code, void *param);
 int			mouse_move(int x, int y, void *param);
-int			mouse_action(int button_code, int y, int x, void *param);
+int			mouse_action(int button_code, void *param);
 
 /*
 **	terminal parsing

@@ -39,11 +39,14 @@ char		*get_cl_file(t_mlx *mlx, size_t *size)
 
 	if (mlx->frac_type == MANDELBROT)
 		cl_file = cl_gnl(open("./sources/open_cl/gpu_mandelbrot.cl", O_RDONLY));
-	if (mlx->frac_type == JULIA)
+	else
 		cl_file = cl_gnl(open("./sources/open_cl/gpu_julia.cl", O_RDONLY));
 	*size = ft_strlen(cl_file);
 	return (cl_file);
 }
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
 void		cl_init(t_mlx *mlx)
 {
@@ -74,6 +77,8 @@ void		cl_init(t_mlx *mlx)
 	cl_set_kernel(&mlx->cl);
 	free(cl_file);
 }
+
+#pragma clang diagnostic pop
 
 void		cl_run_kernels(t_mlx *mlx)
 {
