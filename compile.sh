@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 CLANG=$(find /usr /home -type f -name clang 2>/dev/null)
 if [[ "$CLANG" == "" ]]; then
