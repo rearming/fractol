@@ -27,7 +27,7 @@ void		r_triangle(t_mlx *mlx, t_point top, int len, int r_calls)
 	t_point		bot1;
 	t_point		bot2;
 
-	if (!r_calls)
+	if (r_calls < 1)
 		return ;
 	bot1 = top;
 	bot2 = top;
